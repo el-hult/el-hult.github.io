@@ -11,6 +11,7 @@ GitHub Pages uses Jekyll to create static web pages. Jekyll parses markdown file
 By default, Jekyll uses the markdown parser kramdown, and [it identifies call math and make sure that it is tagged for MathJax to process](https://kramdown.gettalong.org/math_engine/mathjax.html). However, the actual rendering of the MathJax engine is not active by default. 
 The easiest way to activate MathJax is by writing a `<script>` tag that tells the web browser to feth MathJax and process the whole page. This is well described on their [getting started page](https://www.mathjax.org/#gettingstarted). That script tag should be in the `<head>` section of the page, which in Jekyll is specified in the layout definitions, which in turn is part of the theme. So we must configure the theme to make it ave the correct MathJax include-links.
 
+<!--
 ## How to
 
 1. Create a github pages repository. Follow instructions [here](https://pages.github.com/). Initialize it as empty.
@@ -33,3 +34,5 @@ I did read, learn, and steal a bit from various posts online. These where the mo
 - Ben Landsdell 2016: http://benlansdell.github.io/computing/mathjax/
 - Brendan A R Sechter 2016 : http://sgeos.github.io/github/jekyll/2016/08/21/adding_mathjax_to_a_jekyll_github_pages_blog.html
 - Alan Duan 2017: https://alan97.github.io/random/mathjax/
+
+-->
