@@ -30,6 +30,8 @@ According to the [MathJax documentation](https://www.mathjax.org/#gettingstarted
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 ```
-to always get the latest MathJax version. I add that to the `_includes/scripts.html` file.
+to always get the latest MathJax version. I add that to the `_includes/mathjax.html` file.
 
 However, we now need to make sure that Jekyll always includes that file, when building the static site. We wish to use the (https://jekyllrb.com/docs/includes/) mechanism.
+
+The theme I use have the full source from [here](https://github.com/pages-themes/minimal) and I copy files from there, and just make small changes to make sure the java script references are there. You can get the whole `default.html`, and then I just insert a single include-statment `{include mathjax.html}` and then it is done.
