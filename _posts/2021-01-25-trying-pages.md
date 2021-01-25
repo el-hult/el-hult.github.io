@@ -12,3 +12,8 @@ Enjoy!
 
 
 Oh! And here is an image ![Some curves in  achart](/assets/betas.png)
+
+
+$$x=3-e^{4\ell}$$
+
+The formula above is not the same as @@h=3@@.
