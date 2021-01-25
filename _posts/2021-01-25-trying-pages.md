@@ -8,3 +8,6 @@ MAking a minimal start is simple. But getting Latex rendering to work is more di
 So this post is simply me trying to understand how posts work. 
 
 Enjoy!
+
+
+Oh! And here is an image ![Some curves in  achart](/assets/betas.png)
