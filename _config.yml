@@ -4,11 +4,11 @@ kramdown:
 
 
 author:
-  name             : "Arnout Devos"
+  name             : "Ludvig Hult"
   avatar           : "/assets/profile.png"
   bio              : "Machine Learning and Causal Inference"
   location         : "Sweden"
-  email            : "ludvig.hult@gmail.com
+  email            : "ludvig.hult@gmail.com"
   github           : "el-hult"
   linkedin         : "ludvighult" # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
   google_scholar   : "kz1VezoAAAAJ"
