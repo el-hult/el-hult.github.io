@@ -7,11 +7,7 @@ This is a first  version
 There might be a CV here at some point. 
 
 ## Social media 
-There might be a social media link.
-
-
-## Typesetting
-I use github pages as simple as i can.
+There might be a social media link here at some point.
 
 # Posts
 
