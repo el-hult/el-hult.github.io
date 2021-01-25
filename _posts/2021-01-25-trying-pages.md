@@ -15,7 +15,7 @@ The easiest way to activate MathJax is by writing a `<script>` tag that tells th
 
 1. Create a github pages repository. Follow instructions [here](https://pages.github.com/). Initialize it as empty.
 1. Select a theme. I chose minimal, also called `jekyll-theme-minimal`. Documentation can be found [here](https://github.com/pages-themes/minimal). Think of it like this: when GitHub Pages processes your repo (using Jekyll) to create the static pages, it will look into directories such as `_layouts` and `_includes` to compile the page. If the file is not available in your repo Jekyll will fall back to the files in the Theme (i.e. that linked repo with the documentation). Thus, all config is made by overriding files from the base repo.
-1. Copy the `_layout/default.html` file from the source repo and into your own repo. Inside the `<head>` tag, write the code `{% include mathjax.html %}`. This will utilize the jekyll [include](https://jekyllrb.com/docs/includes/) mechanism to insert the content of that `mathjax.html` file in the page head of all your pages. 
+1. Copy the `_layout/default.html` file from the source repo and into your own repo. Inside the `<head>` tag, write the code {% raw %}`{% include mathjax.html %}`{% endraw %}. This will utilize the jekyll [include](https://jekyllrb.com/docs/includes/) mechanism to insert the content of that `mathjax.html` file in the page head of all your pages. 
 1. Create the file `_includes/mathjax.html` with the `<script src=...>` as described in [the MathJax documentation](https://www.mathjax.org/#gettingstarted). Now all your pages are MathJax powered!
 1. Create `index.md` and write some math. Commit it. Then read your page at `username.github.io` or whatever page name you have.
 
