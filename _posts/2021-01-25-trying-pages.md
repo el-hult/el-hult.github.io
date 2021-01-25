@@ -31,3 +31,5 @@ According to the [MathJax documentation](https://www.mathjax.org/#gettingstarted
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 ```
 to always get the latest MathJax version. I add that to the `_includes/scripts.html` file.
+
+However, we now need to make sure that Jekyll always includes that file, when building the static site. We wish to use the (https://jekyllrb.com/docs/includes/) mechanism.
