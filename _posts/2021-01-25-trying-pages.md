@@ -19,4 +19,21 @@ The easiest way to activate MathJax is by writing a `<script>` tag that tells th
 1. Create the file `_includes/mathjax.html` with the `<script src=...>` as described in [the MathJax documentation](https://www.mathjax.org/#gettingstarted). Now all your pages are MathJax powered!
 1. Create `index.md` and write some math. Commit it. Then read your page at `username.github.io` or whatever page name you have.
 
-Now it is done! So here is an equation: \\(h=3\\).
+Now it is done! So here is an equation: \\(0=e^{-i\pi}+1\\).
+
+
+## Remarks
+
+By default MathJax uses `$$block math mode$$` and `\\(inline math\\)`, which is not the usual syntax in LaTeX.
+Full details in the [MathJax documentation](https://docs.mathjax.org/en/latest/input/tex/delimiters.html)
+You could incorporate some MathJax configuration in the file `_includes/mathjax.html` to choose other delimiters.
+To complicate matters more, `kramdown` interprets backslash as a line break, so to write `\\(inline math\\)` you actually have to write `\\\\(inline math\\\\)`. So you can see why people may choose to do some config here.
+
+Most other guides also use the [front matter](https://jekyllrb.com/docs/front-matter/) to set a flag `usemath: true` or similar, and then use {%raw%}`{ if page.usemath }{% include ....%}{ end if }`{%endraw%} etc. I guess this can be good for performance, so that your broswer only fetch that javascript file when needed. On the other hand, you need to handle that front matter for every page, and that seems like a big hassle. So I don't do that.
+
+## Acknowledgements
+I did read, learn, and steal a bit from various posts online. These where the most important ones:
+
+- Ben Landsdell 2016: http://benlansdell.github.io/computing/mathjax/
+- Brendan A R Sechter 2016 : http://sgeos.github.io/github/jekyll/2016/08/21/adding_mathjax_to_a_jekyll_github_pages_blog.html
+- Alan Duan 2017: https://alan97.github.io/random/mathjax/
