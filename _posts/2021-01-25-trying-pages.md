@@ -34,4 +34,8 @@ to always get the latest MathJax version. I add that to the `_includes/mathjax.h
 
 However, we now need to make sure that Jekyll always includes that file, when building the static site. We wish to use the (https://jekyllrb.com/docs/includes/) mechanism.
 
-The theme I use have the full source from [here](https://github.com/pages-themes/minimal) and I copy files from there, and just make small changes to make sure the java script references are there. You can get the whole `default.html`, and then I just insert a single include-statment `{include mathjax.html}` and then it is done.
+The theme I use have the full source from [here](https://github.com/pages-themes/minimal) and I copy files from there, and just make small changes to make sure the java script references are there. You can get the whole `default.html`, and then I just insert a single include-statment `{% include mathjax.html %}` and then it is done.
+
+If you look at what other people does online, they typically also include custom delimiters (e.g. `@@inline math@@` instead of `$inline math$`) but i skip that.
+
+I also put the mathjax include in the default layout instead of some logic only having it on pages that ask for it. I think my way is simpler.
