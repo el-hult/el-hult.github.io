@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Trying GitHub Pages"
+mathjax: true
 ---
 So I thought I'd write a line about how it is to have a first experience in using GitHub Pages.
 
