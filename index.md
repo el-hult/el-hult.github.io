@@ -12,9 +12,6 @@ There might be a social media link.
 
 ## Typesetting
 I use github pages as simple as i can.
-$$
-K(a,b) = \int \mathcal{D}x(t) \exp(2\pi i S[x]/\hbar)
-$$
 
 # Posts
 
