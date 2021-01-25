@@ -1,7 +1,4 @@
 theme: jekyll-theme-minimal
-kramdown:
-  math_engine: mathjax
-
 
 author:
   name             : "Ludvig Hult"
