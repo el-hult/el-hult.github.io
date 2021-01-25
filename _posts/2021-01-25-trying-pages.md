@@ -24,3 +24,10 @@ It identifies can identify all math and make sure that it is tagged for MathJax 
 
 However, Jekyll does not ship with mathjax. So I need to tell Jekyll to inculde the import-link for math-jax.
 That can be done in several ways. 
+
+According to the [MathJax documentation](https://www.mathjax.org/#gettingstarted), we should make sure to include 
+```html
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+```
+to always get the latest MathJax version. I add that to the `_includes/scripts.html` file.
