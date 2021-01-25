@@ -1,14 +1,14 @@
 theme: jekyll-theme-minimal
 show_downloads: false
 
-author:
-  name             : "Ludvig Hult"
-  avatar           : "/assets/profile.png"
-  bio              : "Machine Learning and Causal Inference"
-  location         : "Sweden"
-  email            : "ludvig.hult@gmail.com"
-  github           : "el-hult"
-  linkedin         : "ludvighult" # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
-  google_scholar   : "kz1VezoAAAAJ"
-  stackoverflow    : "4050510/ludvigh" # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
-  twitter          : "el_hult"
+
+author           : "Ludvig Hult"
+avatar           : "/assets/profile.png"
+bio              : "Machine Learning and Causal Inference"
+location         : "Sweden"
+email            : "ludvig.hult@gmail.com"
+github           : "el-hult"
+linkedin         : "ludvighult" # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
+google_scholar   : "kz1VezoAAAAJ"
+stackoverflow    : "4050510/ludvigh" # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
+twitter          : "el_hult"
