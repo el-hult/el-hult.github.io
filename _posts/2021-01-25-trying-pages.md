@@ -19,4 +19,4 @@ The easiest way to activate MathJax is by writing a `<script>` tag that tells th
 1. Create the file `_includes/mathjax.html` with the `<script src=...>` as described in [the MathJax documentation](https://www.mathjax.org/#gettingstarted). Now all your pages are MathJax powered!
 1. Create `index.md` and write some math. Commit it. Then read your page at `username.github.io` or whatever page name you have.
 
-Now it is done! So here is an equation: \(h=3\).
+Now it is done! So here is an equation: \\(h=3\\).
