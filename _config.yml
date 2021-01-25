@@ -1,4 +1,5 @@
 theme: jekyll-theme-minimal
+show_downloads: false
 
 author:
   name             : "Ludvig Hult"
