@@ -17,22 +17,27 @@ You are given a scalar series \\((y\_t)\_{t=1}^{t\_{max}}\\) and a vector valued
 \label{eq:rls:optim} \theta\_t := \text{arg min}\_\theta \frac{1}{2} \sum\_{s=1}^{t} \lambda^{t-s} |y\_{s} - \theta^T z\_{s} |^2 + \frac{\lambda^t\delta}{2} |\theta|^2 \tag{1}
 \\end{equation}
 
-repeatedly for increasing \\(t\\). The two tuning parameters are \\(\lambda\\) and \\(\delta\\).
+repeatedly for \\(t\\) from \\(t=1\)) to \\(t\_max\\). If  There are two tuning parameters: \\(\lambda\\) and \\(\delta\\).
 The objective function is first cast into vector notation by means of a weight matrix \\(\Lambda\_t = \text{diag}(\lambda^0,\lambda^1,...\lambda^t)\\).
 Define \\(\vec y\_t\\) to be the vector of \\((y\_s)\_{s=1}^{t}\\) up to time \\(t\\).
-Let $\vec z\_t$ be a matrix with \\((z\_s^T)\_{s=1}^{t}\\) as the rows. This recasts the problem as
+Let \\(\vec z\_t\\) be a matrix with \\((z\_s^T)\_{s=1}^{t}\\) as the rows. This recasts the problem as
 \\begin{equation} \theta\_t := \text{argmin}\_\theta \frac{1}{2} (\vec y\_t -  \vec z\_t \theta)^T \Lambda\_t (\vec y\_t - \vec z\_t \theta) + \frac{\lambda^t\delta}{2} \theta^T \theta \\end{equation}
-We let \\(I\\) denote an appropriately sized identity matrix. 
+ 
 
 Diffrentiating and setting zero yields the equation
 \\begin{equation} \theta\_t = \left(\vec z\_t^T \Lambda\_t\vec z\_t + \lambda^t\delta I \right)^{-1} \vec z\_t\Lambda\_t \vec y\_t  \tag{2} \\end{equation}
+We have introduced \\(I\\) to denote an appropriately sized identity matrix.
 
-This can be recursively be computed via the use of
+This can be recursively be computed. Define 
 \\begin{equation} \vec p\_t :=\vec z\_t\Lambda\_t \vec y\_t = \lambda \vec p\_{t-1 }+ z\_ty\_t\\end{equation}
-\\begin{equation} R\_t := \left(\vec z\_t^T \Lambda\_t\vec z\_t + \lambda^t \delta I \right)  = \lambda R\_{t-1} + z\_tz\_t^T \\end{equation}
-and with the [Sherman–Morrison formula](https://en.wikipedia.org/wiki/Sherman%E2%80%93Morrison\_formula), we can compute
+and 
+\\begin{equation} R\_t := \left(\vec z\_t^T \Lambda\_t\vec z\_t + \lambda^t \delta I \right)  = \lambda R\_{t-1} + z\_tz\_t^T \tag{3}\\end{equation}
+and 
+\\begin{equation} P\_t:=R\_t^{-1} \\end{equation}
+. Since equation (3) is a rank-one update, we can apply the  [Sherman–Morrison formula](https://en.wikipedia.org/wiki/Sherman%E2%80%93Morrison\_formula) and do fast updates on \\(P\_{t-1}\\) to obtain \\(P\_t\\).
+The computation is
 \\begin{equation}P\_t:=R\_t^{-1} = \lambda^{-1} \left( R\_{t-1} +\lambda^{-1} z\_tz\_t^T   \right)^{-1} = \lambda^{-1}P\_{t-1} - \lambda^{-1}\frac{P\_{t-1} z\_t z\_t^T P\_{t-1} }{\lambda+ z\_t^T P\_{t-1}z\_t } \\end{equation}
-very efficiently. We may also introduce the \_Kalman gain\_ \\(\vec k\_t := \frac{P\_{t-1} z\_t}{\lambda+ z\_t^T P\_{t-1}z\_t }\\) so that \\(P\_t = (I- \vec k\_t z\_t^T)\lambda^{-1}P\_{t-1}\\).  That allows some simplifications of equation (2).
+We may also introduce the _Kalman gain_ \\(\vec k\_t := \frac{P\_{t-1} z\_t}{\lambda+ z\_t^T P\_{t-1}z\_t }\\) so that \\(P\_t = (I- \vec k\_t z\_t^T)\lambda^{-1}P\_{t-1}\\). We now have most of the symbols needed to simplify equation (2).
 
 
 
@@ -54,6 +59,7 @@ We finally introduce the \_prediction error\_ or \_innovation\_ \\(e\_t := y\_t 
 We initialize with \\(P\_0 = I \frac{1}{\delta}\\) and \\(\theta\_0 = \vec 0\\).
 
 ## Remark
+
 In equation (1) we have a simple least squares objective plus a regularizing term. If not the regularizing term was vanishing with increasing \\(t\\), it would be a ridge regression problem.
 
 By not having a vanishing regularization like this, we cannot make the simple recursive formulation with rank one updates by the Sherman-Morrison formula. We are thus forced to have this vanishin regularization if we want fast simple updates.
@@ -64,3 +70,5 @@ If the forgetting factor \\(\lambda=1\\), then the regularizing term will never 
 
 ## Meta-comments
 I wrote this post by hand directly into the web-editor on github. It was a pain. But doing mistakes in what MathJax can/can't do, as well as falling into pitfalls from Jekyll and kramdown was a pain. I have soooo many manually type backslashes in the sourse that I soon need to find a better way to typeset this mess. I'll let you know in time.
+
+Furthermore, it seems line breaking in MathJax `align` environments does not work as expected. So a middle part in this post is a mess. I'll look into it eventually. But for now, I'll let it be.
