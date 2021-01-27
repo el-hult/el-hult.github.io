@@ -53,7 +53,7 @@ We may also introduce the _Kalman gain_ \\(\vec k\_t := \frac{P\_{t-1} z\_t}{\la
 	 & =   \theta\_{t-1} + \vec k\_t \left[y\_t - \hat y\_t \right]
 \\end{align}
 
-We finally introduce the \_prediction error\_ or \_innovation\_ \\(e\_t := y\_t - \hat y\_t\\) and arrive at our final update equation
+By the end, we introduced the prediction \\(\hat y\_t := z\_t^T\theta\_{t-1} \\). We finally introduce the _prediction error_ or _innovation_ \\(e\_t := y\_t - \hat y\_t\\) and arrive at our final update equation
 \\begin{equation} \theta\_t = \theta\_{t-1}+\vec k\_t e\_t\\end{equation}
 
 We initialize with \\(P\_0 = I \frac{1}{\delta}\\) and \\(\theta\_0 = \vec 0\\).
@@ -68,7 +68,14 @@ Online ridge regression is a technique that has been studied, but is in the fiel
 
 If the forgetting factor \\(\lambda=1\\), then the regularizing term will never vanish and we do get a online ridge problem.
 
+The initialization \\(P\_0\\) is obvious here. The value chosen corresponds to a ridge regression with vanishing regularization coefficient. In some references (e.g. the [wikipedia article](https://en.wikipedia.org/wiki/Recursive_least_squares_filter)) they simply state that such an initialization is customary, but I think this derivation clearly shows where it comes from and how it should be interpreted.
+
+Nothing in the derivation motivates why the one-step ahead prediction \\(\\hat y\_t\\) is a reasonable idea. It does not show that the values converges to something reasonable. Please refer to other sources for such proofs.
+
 ## Meta-comments
 I wrote this post by hand directly into the web-editor on github. It was a pain. But doing mistakes in what MathJax can/can't do, as well as falling into pitfalls from Jekyll and kramdown was a pain. I have soooo many manually type backslashes in the sourse that I soon need to find a better way to typeset this mess. I'll let you know in time.
 
-Furthermore, it seems line breaking in MathJax `align` environments does not work as expected. So a middle part in this post is a mess. I'll look into it eventually. But for now, I'll let it be.
+Furthermore, it seems line breaking in MathJax `align` environments does not work as expected. 
+This is apparently (a known bug in MathJax 3](https://github.com/mathjax/MathJax/issues/2312)
+So a middle part in this post is a mess. 
+I'll look into it eventually. But for now, I'll let it be.
