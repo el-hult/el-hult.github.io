@@ -17,7 +17,7 @@ You are given a scalar series \\((y\_t)\_{t=1}^{t\_{max}}\\) and a vector valued
 \label{eq:rls:optim} \theta\_t := \text{arg min}\_\theta \frac{1}{2} \sum\_{s=1}^{t} \lambda^{t-s} |y\_{s} - \theta^T z\_{s} |^2 + \frac{\lambda^t\delta}{2} |\theta|^2 \tag{1}
 \\end{equation}
 
-repeatedly for \\(t\\) from \\(t=1\)) to \\(t\_max\\). If  There are two tuning parameters: \\(\lambda\\) and \\(\delta\\).
+repeatedly for $$t$$ from $$t=1$$ to $$t_{max}$$. If  There are two tuning parameters: \\(\lambda\\) and \\(\delta\\).
 The objective function is first cast into vector notation by means of a weight matrix \\(\Lambda\_t = \text{diag}(\lambda^0,\lambda^1,...\lambda^t)\\).
 Define \\(\vec y\_t\\) to be the vector of \\((y\_s)\_{s=1}^{t}\\) up to time \\(t\\).
 Let \\(\vec z\_t\\) be a matrix with \\((z\_s^T)\_{s=1}^{t}\\) as the rows. This recasts the problem as
@@ -48,7 +48,7 @@ $$
 	 & = ( I- \vec k_t z_t^T)\lambda^{-1}P_{t-1}\left[ \lambda \vec p_{t-1} + z_ty_t \right]                                                                        \\
 	 & = ( I- \vec k_t z_t^T)\left[ \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t \right\]                                                                                \\
 	 & =   \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t - \vec k_t z_t^T\left[ \lambda \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t \right]                             \\
-	 & =   \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t - \vec k_t \left[\hat y_t + \lambda^{-1} z_t^T P_{t-1}z_ty_t \right\]                                        \\
+	 & =   \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t - \vec k_t \left[\hat y_t + \lambda^{-1} z_t^T P_{t-1}z_ty_t \right]                                        \\
 	 & =   \theta_{t-1} + \lambda^{-1} \vec k_t y_t\left[\lambda+ z_t^T P_{t-1}z_t \right\] - \vec k_t \left[\hat y_t + \lambda^{-1}z_t^T P_{t-1}z_ty_t \right] \\
 	 & =   \theta_{t-1} + \vec k_t \left[y_t - \hat y_t \right]
 \end{align}
