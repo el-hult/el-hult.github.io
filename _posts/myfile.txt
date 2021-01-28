@@ -1,0 +1,6 @@
+$$
+\begin{aligned}
+x&=3+2\\
+ &=5
+\end{aligned}
+$$
