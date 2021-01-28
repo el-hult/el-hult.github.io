@@ -40,18 +40,19 @@ The computation is
 We may also introduce the _Kalman gain_ \\(\vec k\_t := \frac{P\_{t-1} z\_t}{\lambda+ z\_t^T P\_{t-1}z\_t }\\) so that \\(P\_t = (I- \vec k\_t z\_t^T)\lambda^{-1}P\_{t-1}\\). We now have most of the symbols needed to simplify equation (2).
 
 
-
-\\begin{align}
-	\theta\_t
-	 & = \left(\vec z\_t^T \Lambda\_t\vec z\_t + \lambda^t\delta I \right)^{-1} \vec z\_t\Lambda\_t \vec y\_t                                                      \\\\
-	 & = P\_t \vec p\_t                                                                                                                                            \\\\
-	 & = ( I- \vec k\_t z\_t^T)\lambda^{-1}P\_{t-1}\left[ \lambda \vec p\_{t-1} + z\_ty\_t \right]                                                                \\\\
-	 & = ( I- \vec k\_t z\_t^T)\left[ \theta\_{t-1} + \lambda^{-1}P\_{t-1}z\_ty\_t \right]                                                                        \\\\
-	 & =   \theta\_{t-1} + \lambda^{-1}P\_{t-1}z\_ty\_t - \vec k\_t z\_t^T\left[ \lambda \theta\_{t-1} + \lambda^{-1}P\_{t-1}z\_ty\_t \right]                             \\\\
-	 & =   \theta\_{t-1} + \lambda^{-1}P\_{t-1}z\_ty\_t - \vec k\_t \left[\hat y\_t + \lambda^{-1} z\_t^T P\_{t-1}z\_ty\_t \right]                                        \\\\
-	 & =   \theta\_{t-1} + \lambda^{-1} \vec k\_t y\_t\left[\lambda+ z\_t^T P\_{t-1}z\_t \right] - \vec k\_t \left[\hat y\_t + \lambda^{-1}z\_t^T P\_{t-1}z\_ty\_t \right] \\\\
-	 & =   \theta\_{t-1} + \vec k\_t \left[y\_t - \hat y\_t \right]
-\\end{align}
+$$
+\begin{aligned}
+	\theta_t
+	 & = \left(\vec z_t^T \Lambda_t\vec z_t + \lambda^t\delta I \right)^{-1} \vec z_t\Lambda_t \vec y_t                                                               \\
+	 & = P_t \vec p_t                                                                                                                                                     \\
+	 & = ( I- \vec k_t z_t^T)\lambda^{-1}P_{t-1}\left[ \lambda \vec p_{t-1} + z_ty_t \right]                                                                        \\
+	 & = ( I- \vec k_t z_t^T)\left[ \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t \right\]                                                                                \\
+	 & =   \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t - \vec k_t z_t^T\left[ \lambda \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t \right]                             \\
+	 & =   \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t - \vec k_t \left[\hat y_t + \lambda^{-1} z_t^T P_{t-1}z_ty_t \right\]                                        \\
+	 & =   \theta_{t-1} + \lambda^{-1} \vec k_t y_t\left[\lambda+ z_t^T P_{t-1}z_t \right\] - \vec k_t \left[\hat y_t + \lambda^{-1}z_t^T P_{t-1}z_ty_t \right] \\
+	 & =   \theta_{t-1} + \vec k_t \left[y_t - \hat y_t \right]
+\end{align}
+$$
 
 By the end, we introduced the prediction \\(\hat y\_t := z\_t^T\theta\_{t-1} \\). We finally introduce the _prediction error_ or _innovation_ \\(e\_t := y\_t - \hat y\_t\\) and arrive at our final update equation
 \\begin{equation} \theta\_t = \theta\_{t-1}+\vec k\_t e\_t\\end{equation}
@@ -70,7 +71,7 @@ If the forgetting factor \\(\lambda=1\\), then the regularizing term will never 
 
 The initialization \\(P\_0\\) is obvious here. The value chosen corresponds to a ridge regression with vanishing regularization coefficient. In some references (e.g. the [wikipedia article](https://en.wikipedia.org/wiki/Recursive_least_squares_filter)) they simply state that such an initialization is customary, but I think this derivation clearly shows where it comes from and how it should be interpreted.
 
-Nothing in the derivation motivates why the one-step ahead prediction \\(\\hat y\_t\\) is a reasonable idea. It does not show that the values converges to something reasonable. Please refer to other sources for such proofs.
+Nothing in the derivation motivates why the one-step ahead prediction $$\hat y_t$$ is a reasonable idea. It does not show that the values converges to something reasonable. Please refer to other sources for such proofs.
 
 ## Meta-comments
 I wrote this post by hand directly into the web-editor on github. It was a pain. But doing mistakes in what MathJax can/can't do, as well as falling into pitfalls from Jekyll and kramdown was a pain. I have soooo many manually type backslashes in the sourse that I soon need to find a better way to typeset this mess. I'll let you know in time.
@@ -79,3 +80,8 @@ Furthermore, it seems line breaking in MathJax `align` environments does not wor
 This is apparently (a known bug in MathJax 3](https://github.com/mathjax/MathJax/issues/2312)
 So a middle part in this post is a mess. 
 I'll look into it eventually. But for now, I'll let it be.
+
+_Update 2021-01-28_: Today I troubleshooted the errors in the markdown. I did so by installing [kramdown](https://kramdown.gettalong.org/) locally on my machine and then parsing this post. In that way I could see various parse errors and see the HTML output. I found the following:
+
+1. \\left\[ had to be typed as `\\left\[`. Because otherwise the `[` is interpreted as a start of a [reference link](https://kramdown.gettalong.org/syntax.html#reference-links). 	
+2. kramdown supports [mathmode](https://kramdown.gettalong.org/syntax.html#math-blocks). In that mode, normal escape rules are ignored so that one does not neet to do all the silly extra backslashes. What a mess! Using `$$math$$` will either produce `\[math\]` or `\(math\)` depending on whether it is written in line or as a separate block (blank line before and after).
