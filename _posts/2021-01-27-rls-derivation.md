@@ -17,7 +17,7 @@ $$
 \label{eq:rls:optim} \theta_t := \text{arg min}_\theta \frac{1}{2} \sum_{s=1}^{t} \lambda^{t-s} |y_{s} - \theta^T z_{s} |^2 + \frac{\lambda^t\delta}{2} |\theta|^2 \tag{1}
 $$
 
-repeatedly for $$t$$ from $$t=1$$ to $$t_{max}$$. If  There are two tuning parameters: $$\lambda$$ and $$\delta$$.
+repeatedly for $$t$$ from $$t=1$$ to $$t_{max}$$. There are two tuning parameters: $$0\lt\lambda\leq1$$ and $$0\lt\delta$$.
 The objective function is first cast into vector notation by means of a weight matrix $$\Lambda_t = \text{diag}(\lambda^0,\lambda^1,...\lambda^t)$$.
 Define $$\vec y_t$$ to be the vector of $$(y_s)_{s=1}^{t}$$ up to time $$t$$.
 Let $$\vec z_t$$ be a matrix with $$(z_s^T)_{s=1}^{t}$$ as the rows. This recasts the problem as
