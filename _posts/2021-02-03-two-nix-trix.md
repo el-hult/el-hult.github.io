@@ -1,0 +1,90 @@
+---
+layout: post
+title:  "Two nix-trix"
+---
+
+So today I tried to run some stuff on a Ubuntu server from my Windows 10 machine. I did three things I liked and wanted to write down.
+
+I take it from memory, so I'm almost certain there is minor isseues in the code below. But the main idea should be correct still.
+
+
+# 1) Connecting via WSL
+So the first thing I did was install WSL on Windows 10, and then Ubuntu on that. So Now I had Ubuntu myself, with ssh and all other stuff included.
+
+Since I also use WSL sometimes for running applications on my own machine (easy installation of perl applications (`latexdiff`), Ruby `krambown`) and so on, this was a minor thing. 
+
+I connect via ssh
+
+~~~bash
+# create SSH session 1
+$ssh username@server
+username@server's password:
+~~~
+
+# 2) Reproducing environment via git and conda
+All code and config was put in a `git` repo.
+
+On the server I created a repo where I wanted to create the environment. I made sure there was a master branch, because I didn't realize how to [push to a bare repo](https://www.jeffgeerling.com/blogs/jeff-geerling/push-your-git-repositories). I guess that step can be made smoother.
+
+It was also important to detach the head so that the master branch was no the same as the working tree. If this step is omitted, others cannot push onto the master branch.
+
+~~~bash
+# in SSH session 1
+$ mkdir ~/foo
+$ cd ~/foo
+$ git init .
+$ touch readme.md
+$ git add .
+$ git commit -m "created master branch"
+$ git checkout --detach
+~~~
+
+Then on my windows machine, I created a remote, checked out, rebased, and pushed. 
+~~~powershell
+PS> cd path/to/stuff
+PS> git remote add serverName ssh://username@server/~/foo
+PS> git fetch --all serverName
+PS> git checkout master
+PS> git rebase serverName/master
+PS> git push --set-upstream servername master
+~~~
+
+then on the server again, I installed all dependencies and ran the code.
+
+~~~bash
+# in SSH session 1
+$conda env create --file=environment.yml
+$python whatever.py
+~~~
+
+So that is quite nice and simple. There was some annoyances with fixing the remote tracking properly, but this was all okay.
+
+
+# 3) Starting the job via tmux for long runs
+So in practice, the last command `python whatever.py` was a long running job, and long running jobs over ssh is not a good idea. If ever the connection is reset, a hang up is issued and the program is stopped. There are ways to deal with that, such as the `nohop` command in unix/linus world. But a friend of mine ([Tomas Aschen](https://twitter.com/tomasaschan)) gave me a better idea: to use [tmux](https://en.wikipedia.org/wiki/Tmux).
+
+tmux is a program that can do several things, but what is relevant for this context it can create terminals that live a separate lifecycle. The terminals can be detached and reattached. Programs run in that terminal think they are foreground processes and know nothing about ssh. So it is safe to close the ssh connection and tmux lives on in the background running the program. The relevant commands can be found on most tmux cheat sheets, suchas [this one](http://tmuxcheatsheet.com/)
+
+So on the server
+
+~~~bash
+# in SSH session 1
+$tmux new -s my_session
+$python whatever.py 
+~~~
+
+Connect with a new ssh connection, and run
+
+~~~bash
+# in SSH session 2
+$tmux ls
+my_session: 1 windows (created Wed Feb  3 11:43:17 2021) [120x29] (attached)
+~~~
+you see that the first ssh connection is still open, so the tmux session is attached. If you then close the ssh connection you find 
+
+~~~bash
+# in SSH session 2
+$tmux ls
+my_session: 1 windows (created Wed Feb  3 11:43:17 2021) [120x29]
+$tmux a # attach to the last session
+~~~
