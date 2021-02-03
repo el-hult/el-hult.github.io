@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Three nix-trix"
+title:  "Some nix-trix"
 ---
 
 So today I tried to run some stuff on a Ubuntu server from my Windows 10 machine. I did three things I liked and wanted to write down.
