@@ -1,13 +1,5 @@
-# Ludvig Hult
-
-This is a first  version 
-
-## CV
-
-There might be a CV here at some point. 
-
-## Social media 
-There might be a social media link here at some point.
+# About
+This is a kind of blog for Ludvig Hult, to save some thoughts for his own sake, and possibly to the benefit of others who are confused about maths, latex, programming and other related things.
 
 # Posts
 
@@ -23,3 +15,8 @@ Here they are
   {% endfor %}
 </ul>
 
+## CV
+There might be a CV here at some point. 
+
+## Social media 
+There might be some social media links here at some point.
