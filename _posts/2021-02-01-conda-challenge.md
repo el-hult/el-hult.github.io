@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Some exploration of conda"
+tags: [conda, rlang, github]
 ---
 
 

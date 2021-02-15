@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Update equations for Recursive Least Squares"
+tags: [recursive least squares, machine learning, signal processing, online learning, least squares]
 ---
 The Recursive Least Squares (RLS) method is commonly used, but I did not find any derivation of it that suited me. 
 Since I did the derivation for my own sake, I thought I would share it.

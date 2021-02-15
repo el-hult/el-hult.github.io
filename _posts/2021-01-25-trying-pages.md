@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "GitHub Pages with MathJax"
+tags: [github, jekyll, kramdown, MathJax, minimal]
 ---
 
 So I thought I'd write a line about how it is to have a first experience in using GitHub Pages and enabling MathJax. I had not used Jekyll at all before, so this took me a little bit of reading. So here it is.
@@ -19,7 +20,7 @@ The easiest way to activate MathJax is by writing a `<script>` tag that tells th
 1. Create the file `_includes/mathjax.html` with the `<script src=...>` as described in [the MathJax documentation](https://www.mathjax.org/#gettingstarted). Now all your pages are MathJax powered!
 1. Create `index.md` and write some math. Commit it. Then read your page at `username.github.io` or whatever page name you have.
 
-Now it is done! So here is an equation: \\(0=e^{-i\pi}+1\\).
+Now it is done! So here is an equation: $$0=e^{-i\pi}+1$$.
 
 
 ## Remarks
@@ -30,6 +31,9 @@ You could incorporate some MathJax configuration in the file `_includes/mathjax.
 To complicate matters more, `kramdown` interprets backslash as a line break, so to write `\(inline math\)` you actually have to write `\\(inline math\\)`. So you can see why people may choose to do some config here.
 
 Most other guides also use the [front matter](https://jekyllrb.com/docs/front-matter/) to set a flag `usemath: true` or similar, and then use {%raw%}`{ if page.usemath }{% include ....%}{ end if }`{%endraw%} etc. I guess this can be good for performance, so that your broswer only fetch that javascript file when needed. On the other hand, you need to handle that front matter for every page, and that seems like a big hassle. So I don't do that.
+
+### More remarks (2021-02-15)
+Actually, in default `kramdown` settings, one just uses `$$` both for inline and block delimited maths. Inside such a block, there is no need for escape squences, so that makes life MUCH easier. See more here [https://kramdown.gettalong.org/syntax.html#math-blocks](https://kramdown.gettalong.org/syntax.html#math-blocks). Finally, kramdown outputs the relevant delimiters and escapes for MathJax to interpret.
 
 ## Acknowledgements
 I did read, learn, and steal a bit from various posts online. These where the most important ones:

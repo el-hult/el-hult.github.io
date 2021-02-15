@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "My current LaTeX setup"
+tags: [latex,sumatra,pdf,notepad++,texlive,latexpdf]
 ---
 
 # tl;dr
