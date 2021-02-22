@@ -1,6 +1,7 @@
 theme: jekyll-theme-minimal
 show_downloads: false
 
+url              : "https://el-hult.github.io"
 
 author           : "Ludvig Hult"
 avatar           : "/assets/images/profile.jpg"
