@@ -3,7 +3,7 @@ show_downloads: false
 
 
 author           : "Ludvig Hult"
-avatar           : "/assets/profile.png"
+avatar           : "/assets/images/profile.jpg"
 bio              : "Machine Learning and Causal Inference"
 location         : "Sweden"
 email            : "ludvig.hult@gmail.com"
