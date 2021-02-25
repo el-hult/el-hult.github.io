@@ -15,4 +15,4 @@ Normalization is implemented in PyTorch via the classes `torch.nn.BatchNorm1d` a
 It is very simple and quite self explanatory. Please read chapter 3.7 and appendix E in [^1] for the motivation. The API is supposed to be similar to `torch.nn.BatchNorm1d`. Enjoy!
 
 
-[1]: Dinh, Laurent, Jascha Sohl-Dickstein, and Samy Bengio. "Density estimation using real nvp." [https://arxiv.org/abs/1605.08803](https://arxiv.org/abs/1605.08803), Accepted at ICLR 2017 
+[^1]: Dinh, Laurent, Jascha Sohl-Dickstein, and Samy Bengio. "Density estimation using real nvp." [https://arxiv.org/abs/1605.08803](https://arxiv.org/abs/1605.08803), Accepted at ICLR 2017 
