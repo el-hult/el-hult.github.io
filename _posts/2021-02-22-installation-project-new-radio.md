@@ -34,9 +34,7 @@ I bought a new [Pioneer MVH-S420BT](https://www.pioneer-car.eu/eur/products/mvh-
 
 It comes with standard connectors, [ISO 10487 for speaker power and control](https://en.wikipedia.org/wiki/Connectors_for_car_audio#ISO_10487_Harness_Adapter), and a [DIN 41585 "Motorola" radio antenna cable](https://en.wikipedia.org/wiki/Motorola_connector). The pinout below is by James Beckett, a wikipedia contributer.
 
-![ISO pinout](./static/ISO_10487_connector_pinout.png)
-{% include image name="extraction keys.webp" caption="The extraction keys" %}
-
+{% include image name="ISO_10487_connector_pinout.png" caption="ISO 10487 connector pinout" %}
 
 It also has bullet connectors on the wires for pin A4, A7 and A5, so that they can be easily switched around (this will come in handy!). They are color-laeled Yellow, Red and Blue-White.
 

@@ -52,7 +52,7 @@ $$
 	 & =   \theta_{t-1} + \lambda^{-1}P_{t-1}z_ty_t - \vec k_t \left[\hat y_t + \lambda^{-1} z_t^T P_{t-1}z_ty_t \right]                                        \\
 	 & =   \theta_{t-1} + \lambda^{-1} \vec k_t y_t\left[\lambda+ z_t^T P_{t-1}z_t \right] - \vec k_t \left[\hat y_t + \lambda^{-1}z_t^T P_{t-1}z_ty_t \right] \\
 	 & =   \theta_{t-1} + \vec k_t \left[y_t - \hat y_t \right]
-\end{align}
+\end{aligned}
 $$
 
 By the end, we introduced the prediction $$\hat y_t := z_t^T\theta_{t-1} $$. We finally introduce the _prediction error_ or _innovation_ $$e_t := y_t - \hat y_t$$ and arrive at our final update equation
