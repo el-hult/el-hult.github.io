@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "An invertible BatchNormalizer1D"
 tags: [machine learning, normalizing flow, pyyorch]
 ---

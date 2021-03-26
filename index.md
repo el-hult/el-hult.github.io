@@ -1,11 +1,13 @@
-# About
-This is a kind of blog for Ludvig Hult, to save some thoughts for his own sake, and possibly to the benefit of others who are confused about maths, latex, programming and other related things.
+---
+layout: single
+title: About
+author_profile: true
+related: true
+---
 
-# Posts
+This is a kind of blog for Ludvig Hult, to save some thoughts for his own sake, and possibly to the benefit of others who are confused about maths, latex, programming, and my other hobbies.
 
-I really want to use this for posting blog-like articles related to my research and readings.
-
-Here they are
+See list of posts by navigating in the menu or selecting below.
 
 <ul>
   {% for post in site.posts %}
@@ -14,9 +16,3 @@ Here they are
     </li>
   {% endfor %}
 </ul>
-
-## CV
-There might be a CV here at some point. 
-
-## Social media 
-There might be some social media links here at some point.

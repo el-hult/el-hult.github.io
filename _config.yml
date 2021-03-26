@@ -1,15 +1,45 @@
-theme: jekyll-theme-minimal
+remote_theme: "mmistakes/minimal-mistakes@4.22.0"
 show_downloads: false
+plugins:
+  - jekyll-include-cache
+
+minimal_mistakes_skin    : "air"
 
 url              : "https://el-hult.github.io"
+locale           : "en-US"
 
-author           : "Ludvig Hult"
-avatar           : "/assets/images/profile.jpg"
-bio              : "Machine Learning and Causal Inference"
-location         : "Sweden"
-email            : "ludvig.hult@gmail.com"
-github           : "el-hult"
-linkedin         : "ludvighult" # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
-google_scholar   : "kz1VezoAAAAJ"
-stackoverflow    : "4050510/ludvigh" # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
-twitter          : "el_hult"
+author           : 
+  name: "Ludvig Hult"
+  avatar           : "/assets/images/profile.jpg"
+  bio              : "Machine Learning and Causal Inference"
+  links            :
+    - label: "Email"
+      icon: "fas fa-envelope-square"
+      url: "mailto:ludvig.hult@gmail.com"
+    - label: "Linkedin"
+      icon: "fab fa-linkedin"
+      url: "https://linkedin.com/in/ludvighult"
+    - label: "Twitter"
+      icon: "fab fa-twitter-square"
+      url: "https://twitter.com/el_hult"
+    - label: "StackOverflow"
+      icon: "fab fa-stack-overflow"
+      url: "https://stackoverflow.com/users/4050510/ludvigh"
+    - label: "GitHub"
+      icon: "fab fa-github-square"
+      url: "https://github.com/el-hult/"
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      related: true
+
+encoding: "utf-8"
+include:
+  - _pages

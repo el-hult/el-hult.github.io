@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "GitHub Pages with MathJax"
 tags: [github, jekyll, kramdown, MathJax, minimal]
 ---

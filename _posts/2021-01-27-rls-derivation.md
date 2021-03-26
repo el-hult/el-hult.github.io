@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "Update equations for Recursive Least Squares"
 tags: [recursive least squares, machine learning, signal processing, online learning, least squares]
 ---

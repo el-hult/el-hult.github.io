@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "Some exploration of conda"
 tags: [conda, rlang, github]
 ---

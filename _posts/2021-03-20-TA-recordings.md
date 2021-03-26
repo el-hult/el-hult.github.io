@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "Recording videos as a TA"
 tags: [education, videos, mkv, OBS, Windows Connect, OneNote, mkvmerge, HandBrake]
 ---

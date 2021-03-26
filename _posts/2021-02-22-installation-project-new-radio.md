@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Installation project: New radio"
 tags: [hobby, non-professional, car stereo]
 ---
