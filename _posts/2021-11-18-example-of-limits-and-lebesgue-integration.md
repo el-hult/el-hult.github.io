@@ -1,0 +1,72 @@
+---
+title:  "Example of limits and Lebesgue integration"
+tags: [probability, integration, math]
+---
+
+# Why?
+
+Do you often wonder if
+
+$$
+\lim_{n\to\infty} \int f_n d\mu = \int \lim_{n\to\infty} f_n d\mu
+$$
+
+holds true? In general, it is a hard question, but there are several results from lebesgue theory to answer this precisely. In this post, I'll take some examples from Durrett [^1] 
+
+The post is intended at someone who might have seen the definitions, but forgot the intuition.
+
+## Notation
+
+Let $$\mathbb{1}_{A}$$ be the indicator function over $$A$$. I use "alomst surely" and "in probability" instead of "almost everywhere" and "in measure", even if it holds for measures in general.
+
+
+# Examples
+
+## Case 1 - bounded values, unbounded support
+
+This is example 1.5.4 from Durrett. Consider integration over the real line with borel algebra and lebesgue measure $$(\mathbb R, \mathcal R, \lambda)$$. Define the functions 
+
+$$ f_n = \frac{1}{n}\mathbb{1}_{[0,n]} $$.
+
+In this case, $$f_n \to 0$$ pointwise ($$f(x) \to 0 \, \forall x$$),
+almost surely ($$\lambda(\left\{ x\in \mathbb R : f_n(x) \not \to 0 \}\right)=0$$), 
+and in probability ($$ \forall \epsilon>0 ,\, \lambda\left( \{ x \in \mathbb R : |f_n(x)-0|>\epsilon \}\right) \to 0 $$ ).
+Still the limit of the integral does not converge as we hope.
+
+$$\int f_n d\lambda = 1 \neq 0 = \int \lim f_n d\lambda$$
+
+From the image below, we can understand that it is the unbounded support of the functions that makes life hard for us. Since the support grows with $$n$$, there is no possibility to make this integration.
+
+{% include image name="durrett154.svg" caption="The function, and its integral" %}
+
+The Bounded convergence theorem (Thm 1.5.3 in Durrett) is our first main result on when convergence holds. For a function converging in probability, the function must also be bounded and have bounded support. Otherwise, the integral may not converge.
+
+## Case 2 - bounded support, unbounded function
+
+This time, use Example 1.5.6.
+
+$$ f_n = n \mathbb{1}_{[0,1/n]} $$.
+
+This time, we have convergence pointwise, almost surely and in probability. But STILL the limit of the integral is 1, and the integral of the limit is 0. This is because the function values are unbounded.
+
+{% include image name="durrett156.svg" caption="The function, and its integral" %}
+
+Fatous lemma (which applies whenever $$f_n \geq 0$$ ) tells us that the liminf may overshoot, just like in this situation
+
+$$ 1=  \liminf_{n\to \infty} \int f_n \, d\mu =  \int \left( \liminf_{n\to \infty}  f_n \right)\, d\mu  = 0$$
+
+## When does it work?
+
+The second main results to establish when it works generally are the Monotone Convergence Theorem, saying that if the convergence is monotone $$f_n \nearrow f$$ for nonnegative functions $$f_n \geq 0$$, then the integral converges.
+
+The third result is the Dominated Convergence Theorem. For functions converging $$f_n \to f$$ almost surely, we must also demand dominance $$ \lvert f_n \rvert \leq g$$, by an integrable function $$g$$ to get the convergence.
+
+
+
+
+
+[^1]: R. Durrett, Probability: theory and examples, 2nd ed. Belmont, Calif: Duxbury Press, 1996.
+
+
+
+

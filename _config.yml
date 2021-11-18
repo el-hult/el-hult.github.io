@@ -8,6 +8,8 @@ minimal_mistakes_skin    : "air"
 url              : "https://el-hult.github.io"
 locale           : "en-US"
 
+github: [metadata]
+
 author           : 
   name: "Ludvig Hult"
   avatar           : "/assets/images/profile.jpg"
