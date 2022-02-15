@@ -11,3 +11,6 @@ Locally, where I have drafts, I run
 ```
 bundle exec jekyll serve --draft
 ```
+
+please also double check that the Github API key is present in a .env-file and that the key has not expired
+(check settings -> developer settings -> personal access tokens)
