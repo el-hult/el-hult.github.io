@@ -63,14 +63,14 @@ The naming of the pins differ  a little.
 | A7 | 12V+ Switched  | +12V Main Power (Permanent) | May be switched with A4 | Yes
 | A8 | Ground  | Ground (Chassis) |  |Yes
 | -------
-| B1 | Speaker Right Rear +  | Speaker Right Rear + | Yes
-| B2 | Speaker Right Rear -  | Speaker Right Rear - | Yes
-| B3 | Speaker Right Front +  | Speaker Right Front + | Yes
-| B4 | Speaker Right Front -  | Speaker Right Front - | Yes
-| B5 | Speaker Left Front +  | Speaker Left Front + | Yes
-| B6 | Speaker Left Front -  | Speaker Left Front - | Yes
-| B7 | Speaker Left Rear +  | Speaker Left Rear + | Yes
-| B8 | Speaker Left Rear -  | Speaker Left Rear - | Yes
+| B1 | Speaker Right Rear +  | Speaker Right Rear + || Yes
+| B2 | Speaker Right Rear -  | Speaker Right Rear - || Yes
+| B3 | Speaker Right Front +  | Speaker Right Front + || Yes
+| B4 | Speaker Right Front -  | Speaker Right Front - || Yes
+| B5 | Speaker Left Front +  | Speaker Left Front + || Yes
+| B6 | Speaker Left Front -  | Speaker Left Front - || Yes
+| B7 | Speaker Left Rear +  | Speaker Left Rear + || Yes
+| B8 | Speaker Left Rear -  | Speaker Left Rear - || Yes
 |-----
 
 So in conclusion, I needed to switch A4 and A7. However, I don't get switched 12V+, I get VAN+, which is only almost the same thing. 
