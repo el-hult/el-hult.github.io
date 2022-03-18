@@ -9,7 +9,7 @@ More specificly, I use the https://creativecommons.org/licenses/by-sa/4.0/ licen
 Locally, where I have drafts, I run 
 
 ```
-bundle exec jekyll serve --draft
+bundle exec jekyll serve --force_polling --livereload --draft --incremental
 ```
 
 please also double check that the Github API key is present in a .env-file and that the key has not expired
