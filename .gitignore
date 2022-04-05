@@ -1,5 +1,13 @@
+# Ruby
 Gemfile.lock
+
+# Jekyll and its plugins
 _site
 _drafts
-.env
 .jekyll-metadata
+
+# Github password
+.env
+
+# IDE settings
+.vscode

@@ -3,20 +3,24 @@ title:  "Empirical Bernstein Bounds"
 tags: [probability, measure spaces, lebesgue]
 ---
 
-In machine learning, you often rely on the central limit theorem (CLT) in some form.
-For example, you hope that a model selected by empirical risk minimization will be good on future data points, since the empirical risk tends to the true risk. 
+In machine learning, we often rely on the possibility to estimate an expectation by a sample mean. 
+One example is the hope that a model selected by empirical risk minimization will be good on future data points, since the empirical risk tends to the true risk. 
 Empirical averages do tend to the true mean!
 
-$$ \mathbb{E}_n[\ell_\theta(z)] \to \mathbb{E}[\ell_\theta(z)] $$
+$$ \lim_{n\to\infty} \mathbb{E}_n[\ell_\theta(z)] \to \mathbb{E}[\ell_\theta(z)] $$
 
-But how good is this convergence? For a finite sample size $$n$$, this might be very bad! But how bad? The CLT may be used, but the result is only asymptotic.
-A common rule of thumb is to have $$n\geq 30$$ before you apply CLT. So what alternatives can we use?
+But how good is this convergence?
+For a finite sample size $$n$$, we might still have a bad approximation! But how bad?
+The central limit theorem (CLT) a standard approximation to estimate the uncertainty in the approximation, and I'll review its result below, but that result is only asymptotic.
+A common rule of thumb is to have $$n\geq 30$$ before you apply CLT. So what alternatives can we use when we have smaller sample sizes?
 
-We will turn to a simpler notation, having a series of random variables $$X_n$$ for $$n=1..$$, all being iid distributed, and $$\mathbb{E}[X_i]=\mu$$. The empirical mean over $$N$$ data points is $$\overline{X}_N=\frac{1}{N}\sum_{i=1}^{N}X_i$$. Let the empirical variance be $$V_N =\frac{1}{N}\sum_{i=1}^{N} (X_i - \bar{X}_N)^2)$$, and the true variance $$\mathbb{E}[(X_i-\mu)^2]=\sigma^2$$
+We will turn to a simple notation, having a series of random variables $$X_n$$ for $$n=1..$$, all being iid distributed. The  mean $$\mathbb{E}[X_i]=\mu$$ and variance variance $$\mathbb{E}[(X_i-\mu)^2]=\sigma^2$$ are fixed unknown. The empirical mean -- or sample mean -- $$\overline{X}_N=\frac{1}{N}\sum_{i=1}^{N}X_i$$ and variance $$V_N =\frac{1}{N}\sum_{i=1}^{N} (X_i - \bar{X}_N)^2)$$ over $N$ data points are random variables, since they are functions of $$N$$ random variables.
 
-# Variants
+# Measures of uncertainty in mean estimation
 
-## CLT
+Below, I'll state a few different bounds on the estimation error between empirical mean and the true mean. In the end I will compare them.
+
+## Central limit theorem
 
 The CLT gives an asymptotically valid confidence interval for the mean, which can be written as
 
@@ -24,7 +28,7 @@ $$
  \lim_{N\to\infty} \Pr\left[ \left|\overline{X}_N - \mu \right| \leq \Phi^{-1}(1-\delta/2) \sqrt{\frac{V_N}{N}}  \right] = 1- \delta
 $$
 
-using $$\Phi^{-1}$$ for the quantile function of a standard normal random variable. When $$N$$ is larger than ca $$30$$, this is often a good approximation. For small $$N$$, this is is often a bad approximation. To deal with finite $$N$$ we use alternative bounds. 
+using $$\Phi^{-1}$$ for the quantile function of a standard normal random variable. When $$N$$ is larger than ca $$30$$, this is often a good approximation. For small $$N$$, may be a bad approximation. The bound is proportional to $$1/\sqrt{N}$$, which is good to note in comparison to the later bounds.
 
 ## Hoeffding
 
@@ -34,52 +38,45 @@ $$
  \Pr\left[ \left|\overline{X}_N - \mu \right| \leq (u-l)\sqrt{\frac{\ln ( 2/\delta)}{2N}}  \right] \geq 1- \delta
 $$
 
-This is a funny bound, and can be impressibvely good, but if the interval $$[l,u]$$ is loose, the bound may be bad!
+This is a interesting bound as it disregards the variance of data altogether. It can be impressively, good assuming $$(u-l)$$ is not to large in comparison with the variance. By [Popoviciu's inequality on variances](https://en.wikipedia.org/wiki/Popoviciu%27s_inequality_on_variances) we have that $$(u-l) \geq 2 \sigma$$, which is a sometimes useful tool for assessing the looseness of the range $$[l,u]$$.
 
 
 ## Bennets Inequality
 
-In the two-sided form, an inequality known as Bennets, also incorporates the variance of the data. [^maurer] 
+To incorporate information about the variance into the bound, we can turn to Bennets inequality. [^maurer] The two-sided formulation looks like
 
 $$
  \Pr\left[ \left|\overline{X}_N - \mu \right| \leq \sqrt{\frac{2\sigma^2 \ln ( 2/\delta)}{N}} +\frac{ (u-l) \ln ( 2/\delta) }{3N}  \right] \geq 1-\delta
 $$
 
-But the variance $$\sigma^2$$ of the data is not known, so it must be estimated. Since Bennets and Hoeffding are in a class of inequalities known as Bernsteins, these estimated variants are sometimes called Empirical Bernstein bounds. Two are presented below.
+And it asserts that the $$1/\sqrt{N}$$ term depends on the variance, but we must also respect the range of $$X$$ via a $$1/N$$-proportional term. This is the price we pay for having a finite sample valid inequality compared to the CLT, and using the actual variance, compared to Hoeffding.
+
+The variance $$\sigma^2$$ is not known, so it must be estimated. Since Bennets and Hoeffding are in a class of inequalities known as Bernstein's, variants that use empirical estimates are sometimes called Empirical Bernstein bounds.
 
 ## Audibert, Munos, Szepesvári
 
-Form Theorem 1 of [^audibert], we learn that 
+The first Empirical Bernstein bound is presented as Theorem 1 of in a paper by Audibert et al[^audibert]. We learn that 
 
 $$
  \Pr\left[ \left|\overline{X}_N - \mu \right| \leq \sqrt{\frac{2V_{N}\ln ( 3/\delta)}{N}} +\frac{ (u-l) \ln ( 3/\delta) }{N}  \right] \geq 1- \delta
 $$
 
-## Maurir, Pontil
+which is a Bennet-like inequality. The variance has been traded for an empirical variance, and it costs us a worse constant coefficient in both the $$1/N$$ and the $$1/\sqrt{N}$$ terms.
 
-In theorem 4, [^maurer] presentes a single sided bound, and its 2-sided variant is 
-
-$$
- \Pr\left[ \left|\overline{X}_N - \mu \right| \leq \sqrt{\frac{2V_{N} \ln ( 4/\delta)}{N}} +\frac{ 7(u-l) \ln ( 4/\delta) }{3(N-1)}  \right] \geq 1-\delta
-$$
-
-I bring it up because of the existance of a 1-sided version, only dealing with the risk of under-estimation. But otherwise, it is wokse than the form of Audibert, Munos and Szepesvári.
+I will also mention theorem 4, of Maurer and Pontil [^maurer]. They present a single-sided bound which is tighter than the bound of Audibert et al. But the two-sided formulation of it is worse, so I'll not analyze it further here.
 
 # Comparison
 
-Generate random data, with $$[l,u]=[0,1]$$. By Popovicius inequality, $$\sigma^2 \leq 0.25$$. Compute the interval widths for $$N=10, 25, 50, 100, 200$$, $$V_N=0.01, 0.1, 0.25$$ and $$\delta = 0.01, 0.05, 0.1$$. The results are in the plot below. I include CLT, Hoeffding and Audiberts intervals. The code is available in a [GitHub Gist](https://gist.github.com/el-hult/7bd7395c0a23480e82f811dd3bcf96cc)
+Below is a simple comparison of the methods for various settings. We can always scale the data so it is supported on $$[l,u]=[0,1]$$. By Popoviciu's inequality, $$\sigma^2 \leq 0.25$$, which informs us to try $$V_N=0.01, 0.1, 0.25$$. We try sample sizes $$N=10, ..., 200$$,  and $$\delta = 0.01, 0.05, 0.1$$. The results are in the plot below. I include CLT, Hoeffding and Audibert intervals. The code is available in a [GitHub Gist](https://gist.github.com/el-hult/7bd7395c0a23480e82f811dd3bcf96cc)
 
-{%include image name="compare.svg" caption="Results from the numerical experiment. The plots is a bit too small, so please enlarge it to watch it. E.g. open in new tab and zoom a bit." %}
+{%include image name="compare.svg" caption="Results from the numerical experiment. Consider enlarging the plots it to watch it, e.g. open in new tab." %}
 
-The conclusion (if you managed to enlarge it a bit) is that Audiberts bound only beat Hoeffding for the most favorable case: $$N=200$$, $$V_N=0.01$$ and $$\delta=0.1$$.
+The conclusion is that Audibert bound only beat Hoeffding for the most favorable case: very large $$N$$, very small $$V_N$$ and large $$\delta$$.
+So if finite sample guarantee is needed, Hoeffding will often be a better bound.
 
-The CLT bound is generally much smaller.
+If you have a large sample size $$N$$, the CLT approximation is good, and the plots should that the CLT approximate bound is always better than the Audibert and Hoeffding bounds. It is also valid for random variables not supported on a finite interval, which gives it more generality.
 
-To get the finite sample guarantee version of Bennets inequality, incorporating the estimated variance, we pay a price in the form of worsened constants compared to Bennet. These bad constants imply that in practise, they perform worse than Hoeffding.
-
-For $$N \leq 30$$, the the $$O(1/N)$$-term is still often dominating, so by the time this term is negligable, CLT would give a good estimate anyways.
-
-So in conclusion, the empirical bernstein bounds are interesting, but not always that useful. For small sampels, Hoeffding will do good. For large sampels, CLT is good.
+In conclusion: the empirical bernstein bounds are interesting, but not always that useful. For small samples, Hoeffding will do good. For large samples, CLT is good.
 
 
 
