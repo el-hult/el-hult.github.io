@@ -32,15 +32,14 @@ author           :
       url: "https://github.com/el-hult/"
 
 defaults:
-  # _posts
   - scope:
       path: ""
       type: posts
     values:
       layout: single
-      author_profile: true
-      read_time: true
-      related: true
+      author_profile: false
+      read_time: false
+      related: false
 
 encoding: "utf-8"
 include:
