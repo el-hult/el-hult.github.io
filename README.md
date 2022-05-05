@@ -2,9 +2,9 @@
 
 This is a repo for my personal publication on github. 
 
-You may use information here as you like, as long as you give credit to me and let others improve on your work too!
+You may use information here as you like, as long as you give credit to me and let others improve on your work as well. 
 
-More specifically, I use the https://creativecommons.org/licenses/by-sa/4.0/ license
+Specifically, this work is shared under the license CC-BY-SA-4 https://creativecommons.org/licenses/by-sa/4.0/ .
 
 Locally, where I have drafts, I run 
 

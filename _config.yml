@@ -3,7 +3,7 @@ show_downloads: false
 plugins:
   - jekyll-include-cache
 
-minimal_mistakes_skin    : "air"
+minimal_mistakes_skin    : "default"
 
 url              : "https://el-hult.github.io"
 locale           : "en-US"
@@ -37,6 +37,7 @@ defaults:
       type: posts
     values:
       layout: single
+      classes: wide
       author_profile: false
       read_time: false
       related: false

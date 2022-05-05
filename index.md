@@ -1,13 +1,13 @@
 ---
 layout: single
-title: el-hult
+title: Home
 author_profile: true
 related: false
 ---
 
-This is a kind of blog for Ludvig Hult, to save some thoughts for his own sake, and possibly to the benefit of others who are confused about maths, latex, programming, and my other hobbies.
+Personal publication for Ludvig Hult. Notes about maths, latex, programming, machine learning and other hobbies.
 
-See list of posts by navigating in the menu or selecting below.
+See list of posts below.
 
 <ul  style="list-style-type: none;">
   {% for post in site.posts %}
