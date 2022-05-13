@@ -63,23 +63,6 @@ The second main results to establish when it works generally are the Monotone Co
 
 The third result is the Dominated Convergence Theorem. For functions converging $$f_n \to f$$ almost surely, we must also demand dominance $$ \lvert f_n \rvert \leq g$$, by an integrable function $$g$$ to get the convergence.
 
-# An application in probability
-
-You  you want to predict $$y$$ given $$x$$, being draws from the random vector $$(Y,X)$$, and you have historical data of $$n$$ data points. You construct the prediction intercal $$C_n^{\alpha}$$ so that
-
-$$ \Pr ( Y  \in C_n^{\alpha} \lvert X=x_\star ) \to_{p} 1-\alpha $$
-
-as is common in classical OLS prediction intervals (see section 2.4.5 in Ruppert, for example) [^2]. Will this hold even if we marginalize over $$x_\star$$?
-
-The Bounded Convergence Theorem  says that if $$f_n \to_{p} f$$, there is some $$E \subseteq \Omega$$ so that $$\mu(E) < \infty$$, $$f_n(\omega) = 0 $$ for all $$\omega \in E$$, $$\lvert f_n \rvert \leq M$$, then
-
-$$  \int f \, d\mu = \lim_{n\to \infty} \int f_n \, d\mu$$
-
-We can apply this! Define $$f_n = \Pr ( Y  \in C_n^{\alpha} \lvert x=x_\star )$$, $$f = 1-\alpha$$. We have that $$\lvert f_n \rvert \leq 1$$ and $$E=\Omega$$ since $$\mu$$ is a probability measure ensures $$\mu(E) = 1 < \infty$$. Applying the theorem yields to us 
-
-$$  \Pr ( Y  \in C_n^{\alpha} ) \to 1-\alpha $$
-
-
 
 [^1]: R. Durrett, Probability: theory and examples, 2nd ed. Belmont, Calif: Duxbury Press, 1996.
 [^2]: D. Ruppert, M. P. Wand, and R. J. Carroll, Semiparametric Regression. Cambridge University Press, 2003. doi: 10.1017/CBO9780511755453.
