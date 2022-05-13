@@ -55,7 +55,7 @@ This time, we have convergence pointwise, almost surely and in probability. But 
 
 Fatous lemma (which applies whenever $$f_n \geq 0$$ ) tells us that the liminf may overshoot, just like in this situation
 
-$$ 1=  \liminf_{n\to \infty} \int f_n \, d\mu =  \int \left( \liminf_{n\to \infty}  f_n \right)\, d\mu  = 0$$
+$$ 1=  \liminf_{n\to \infty} \int f_n \, d\mu \geq  \int \left( \liminf_{n\to \infty}  f_n \right)\, d\mu  = 0$$
 
 ## When does it work?
 
