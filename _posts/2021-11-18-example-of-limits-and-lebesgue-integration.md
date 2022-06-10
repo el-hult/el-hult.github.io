@@ -55,30 +55,13 @@ This time, we have convergence pointwise, almost surely and in probability. But 
 
 Fatous lemma (which applies whenever $$f_n \geq 0$$ ) tells us that the liminf may overshoot, just like in this situation
 
-$$ 1=  \liminf_{n\to \infty} \int f_n \, d\mu =  \int \left( \liminf_{n\to \infty}  f_n \right)\, d\mu  = 0$$
+$$ 1=  \liminf_{n\to \infty} \int f_n \, d\mu \geq  \int \left( \liminf_{n\to \infty}  f_n \right)\, d\mu  = 0$$
 
 ## When does it work?
 
 The second main results to establish when it works generally are the Monotone Convergence Theorem, saying that if the convergence is monotone $$f_n \nearrow f$$ for nonnegative functions $$f_n \geq 0$$, then the integral converges.
 
 The third result is the Dominated Convergence Theorem. For functions converging $$f_n \to f$$ almost surely, we must also demand dominance $$ \lvert f_n \rvert \leq g$$, by an integrable function $$g$$ to get the convergence.
-
-# An application in probability
-
-You  you want to predict $$y$$ given $$x$$, being draws from the random vector $$(Y,X)$$, and you have historical data of $$n$$ data points. You construct the prediction intercal $$C_n^{\alpha}$$ so that
-
-$$ \Pr ( Y  \in C_n^{\alpha} \lvert X=x_\star ) \to_{p} 1-\alpha $$
-
-as is common in classical OLS prediction intervals (see section 2.4.5 in Ruppert, for example) [^2]. Will this hold even if we marginalize over $$x_\star$$?
-
-The Bounded Convergence Theorem  says that if $$f_n \to_{p} f$$, there is some $$E \subseteq \Omega$$ so that $$\mu(E) < \infty$$, $$f_n(\omega) = 0 $$ for all $$\omega \in E$$, $$\lvert f_n \rvert \leq M$$, then
-
-$$  \int f \, d\mu = \lim_{n\to \infty} \int f_n \, d\mu$$
-
-We can apply this! Define $$f_n = \Pr ( Y  \in C_n^{\alpha} \lvert x=x_\star )$$, $$f = 1-\alpha$$. We have that $$\lvert f_n \rvert \leq 1$$ and $$E=\Omega$$ since $$\mu$$ is a probability measure ensures $$\mu(E) = 1 < \infty$$. Applying the theorem yields to us 
-
-$$  \Pr ( Y  \in C_n^{\alpha} ) \to 1-\alpha $$
-
 
 
 [^1]: R. Durrett, Probability: theory and examples, 2nd ed. Belmont, Calif: Duxbury Press, 1996.
