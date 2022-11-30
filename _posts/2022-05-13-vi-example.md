@@ -50,7 +50,7 @@ Make a bayesian inference about the parameters $$w$$ and $$a$$. What is the mean
 
 ### Interpretation
 Consider a truck that drives on a gravel road. It rocks back and forth, and if the rocking is not too bad, we can model the leaning angle at time $$t$$ as a random variable $$X_t$$. The truck has overdamped suspension so the leaning angle returns to 0 in a rate proportional to the current angle. 
-So ideally, $$X_t = aX_{t-1}$$ with $a \in (0,1)$.
+So ideally, $$X_t = aX_{t-1}$$ with $$a \in (0,1)$$.
 
 However, there are many small bumps in the gravel. The road is equally bumpy everywhere, and there are so many small bumps that the average bump under time $$t$$ is well described by a normal distribution (consider central limit theorem).
 This is modelled by a white noise process, which we call $$cU_t$$.
@@ -258,7 +258,7 @@ $$\begin{aligned}
 Now expand the square in the expectation for $$A$$, and use that $$\mathbb{E}_{q_{1A}}[A] = \mu_T$$ and $$\mathbb{E}_{q_{1A}}[A^2] = \mu_T^2+\sigma_T^2$$, since it is gaussian.
 
 $$\begin{aligned} 
-    \ln q_{2t}(z_t) =& -\frac{1}{2}\frac{( \mu_T^+\sigma_T^2)x_{t-1}^2 - 2\mu_Tx_{t}x_{t-1} + x_{t}^2}{c^2d^2z_t} - \frac{1}{2}\ln (c^2+d^2z_t) \\
+    \ln q_{2t}(z_t) =& -\frac{1}{2}\frac{( \mu_T^2+\sigma_T^2)x_{t-1}^2 - 2\mu_Tx_{t}x_{t-1} + x_{t}^2}{c^2d^2z_t} - \frac{1}{2}\ln (c^2+d^2z_t) \\
                      &+z_t\psi(\alpha_T) +(1-z_t)\psi(\beta_T)\\& + \text{const.}
 \end{aligned}$$
 
