@@ -1,5 +1,5 @@
 ---
-title:  "CVaR, VaR, quantiles and all that jazz"
+title:  "CVaR, VaR and quantiles"
 tags: [probability, finance]
 ---
 
