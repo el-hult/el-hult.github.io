@@ -10,6 +10,8 @@ locale           : "en-US"
 
 github: [metadata]
 
+highlighter: rouge
+
 author           : 
   name: "Ludvig Hult"
   avatar           : "/assets/images/profile.jpg"
