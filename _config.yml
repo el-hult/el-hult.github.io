@@ -15,7 +15,7 @@ highlighter: rouge
 author           : 
   name: "Ludvig Hult"
   avatar           : "/assets/images/profile.jpg"
-  bio              : "Machine Learning and Causal Inference"
+  bio              : "Machine Learning and Causal Inference. PhD student at Uppsala University."
   links            :
     - label: "Email"
       icon: "fas fa-envelope-square"
@@ -23,15 +23,15 @@ author           :
     - label: "Linkedin"
       icon: "fab fa-linkedin"
       url: "https://linkedin.com/in/ludvighult"
-    - label: "Twitter"
-      icon: "fab fa-twitter-square"
-      url: "https://twitter.com/el_hult"
     - label: "StackOverflow"
       icon: "fab fa-stack-overflow"
       url: "https://stackoverflow.com/users/4050510/ludvigh"
     - label: "GitHub"
       icon: "fab fa-github-square"
       url: "https://github.com/el-hult/"
+    - label: "Mastodon"
+      icon: "fab fa-mastodon"
+      url: "https://mastodon.acc.sunet.se/@elhult"
 
 defaults:
   - scope:
@@ -40,7 +40,7 @@ defaults:
     values:
       layout: single
       classes: wide
-      author_profile: false
+      author_profile: true
       read_time: false
       related: false
 
