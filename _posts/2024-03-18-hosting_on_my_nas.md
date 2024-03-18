@@ -1,6 +1,6 @@
 ---
 title: "Hosting things on my Synology NAS"
-tags: [diy, ddns, synology, nas, certificates, duckdns, letsencrypt]
+tags: [diy, ddns, Synology, NAS, certificates, DuckDNS, lets-encrypt]
 ---
 
 I use the domain `elhult.duckdns.org` to host things for private use. It points to my NAS, a DS214+ running DSM 7.1 from Synology. It is useful for backing up photos, running a Dropbox-like service and more.
@@ -18,14 +18,14 @@ While you are at it, you can pin IP of the NAS via the MAC address. Either go in
 
 ## Dynamic DNS via DuckDNS
 
-DNS is the mechanism of resolving a hostname such as `elhult.duckdns.org` into a IP, such as my home network public IP. Since my ISP give me a new IP now and then, I need to update the DNS record regularly. This is called dynamic DNS or DDNS.
+DNS is the mechanism of resolving a host name such as `elhult.duckdns.org` into a IP, such as my home network public IP. Since my ISP give me a new IP now and then, I need to update the DNS record regularly. This is called dynamic DNS or DDNS.
 
 My router has support for DDNS settings. But only from the service providers DynDNS, NoIP and DtDNS. That is not good enough. I want to use [DuckDNS](http://www.duckdns.org/). I need a service running from time to time sending a certain HTTPS request to the DuckDNS server saying "hey, please send traffic on elhult.duckdns.org to me"! You show that you control that specific IP by sending traffic from that IP. It is super simple and you could do it manually with curl using a cron job. You need a computer running the job all the time, and you have the NAS, which can do this job for you!
 
 Connect to the NAS web admin interface. Navigate `Control Panel`>`External Access`>`DDNS`. There is a list of different DDNS providers there if you press `Add`. It is updated sometimes, so maybe DuckDNS is in that list.
 They used to not support DuckDNS out of the box, and in that case you need a config hack. Log in to the NAS via SSH and edit a certain config file to create a new DDNS provider. I believe I followed [this guide](https://medium.com/@unrecondite/using-synology-to-update-your-dynamic-ip-to-the-free-duckdns-service-66b9c5c4be4) when I set it up some year ago, and it has worked reliably since.
 
-## Certificate via LetsEncrypt
+## Certificate via Let's Encrypt
 
 When you connect to the NAS, you want to serve traffic on secure channels, e.g. https. For that, you will need a certificate.
 
@@ -35,7 +35,7 @@ My NAS was powered down when I was abroad, and I got a warning email from Let's 
 
 ## Serving content
 
-Most of the content I serve on the NAS is via the web portal (HTTPS over port 5001) I can access all the "Apps" on the Nas, such as photo gallery, calendar, and more. 
+Most of the content I serve on the NAS is via the web portal (HTTPS over port 5001) I can access all the "Apps" on the NAS, such as photo gallery, calendar, and more. 
 
 I have also deployed web servers temporarily. The Synology app WebStation is essentially a ngnix proxy server that can redirect traffic to php or python web servers (flask, specifically), or serve static content.
 I decided to run a build script on a separate computer to make a static web page, and then serve it statically on the NAS. That way, I needed minimal config on the NAS, and I reduce the risk of messing up security. Remember that you might need to open up extra ports in the router forwarding rules if you add extra services and want to access them over the internet.
