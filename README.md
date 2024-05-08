@@ -14,3 +14,5 @@ bundle exec jekyll serve --force_polling --livereload --draft --incremental
 
 please also double check that the Github API key is present in a .env-file and that the key has not expired
 (check settings -> developer settings -> personal access tokens)
+
+One gotcha with assets in `assets/posts` where I have all images for the posts is that paths must be lowercase. On my local machine it is case insensitive, but on github pages, it is not.
