@@ -205,7 +205,7 @@ The std error is as described above, and it presents the t-statistic under the n
 It also presents the F-statistic under the joint hypothesis of all the coefficients **except the intercept** being zero. The F-statistic in the statsmodels output is this different from the one I computed! Beware!
 This F-test is rather a maximum likliehood ratio test, as used in ANOVA for model fit comparisons. But that is a separate story and not part of this post.
 
-**UPDATE: I wrote about this later in [this post](/2024/01/18/ols-f-statistic.html).**
+**UPDATE: I wrote about this later in [this post](/2024/01/18/ols-f-stat.html).**
 
 The F-based confidence ellipse and box are presented in a plot below.
 
