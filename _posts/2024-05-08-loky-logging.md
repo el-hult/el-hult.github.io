@@ -23,9 +23,12 @@ import logging.handlers
 import multiprocessing
 
 def f(x,queue):
-    # setting up the logger in the work function like this is not perfect. the call `getLogger` will find the process-unique instance of the logger, 
-    # and reuse it. so we cannot configure the logger in the main process every time since, for exampe, it might get multiple handlers cloning every
-    # log message again and again. the simplest workaround is to check if there are any handlers on the logger, indicating set up
+    """
+    setting up the logger in the work function like this is not perfect. the call `getLogger` will find the 
+    process-unique instance of the logger, and reuse it. so we cannot configure the logger in the main 
+    process every time since, for exampe, it might get multiple handlers cloning every log message again and 
+    again. the simplest workaround is to check if there are any handlers on the logger, indicating set up
+    """
     logger_ = logging.getLogger(__name__)
     if not logger_.hasHandlers():
         logger_.setLevel(logging.DEBUG)
@@ -41,7 +44,7 @@ def main():
     logging.basicConfig(level=logging.DEBUG, format="%(processName)s %(levelname)s %(message)s") 
 
     # one must use Manager().Queue() to pass as argument in loky backend, multiprocessing.Queue() will not work
-    # see e.g. https://stackoverflow.com/questions/3217002/how-do-you-pass-a-queue-reference-to-a-function-managed-by-pool-map-async
+    # https://stackoverflow.com/questions/3217002/how-do-you-pass-a-queue-reference-to-a-function-managed-by-pool-map-async
     queue = multiprocessing.Manager().Queue(-1) 
     listener = logging.handlers.QueueListener(queue, *logging.getLogger().handlers) 
     listener.start()
