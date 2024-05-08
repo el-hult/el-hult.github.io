@@ -1,4 +1,3 @@
-
 ---
 title:  "Standard Python Logging with the Joblib Loky Backend"
 tags: [python,logging,loky, multiprocessing]
