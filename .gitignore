@@ -1,5 +1,7 @@
 # Ruby
 Gemfile.lock
+.bundle
+vendor
 
 # Jekyll and its plugins
 _site
