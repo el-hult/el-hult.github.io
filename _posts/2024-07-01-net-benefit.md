@@ -3,9 +3,8 @@ title:  "Analysing Net Benefit Analysis"
 tags: [machine learning,classification, decision theory]
 ---
 
-This post is an exploration of the "NetBenefit curves" of [Vickers and Elkin](https://journals.sagepub.com/doi/10.1177/0272989X06295361), also promoted by [Steyerberg](https://www.clinicalpredictionmodels.org/homepage). I run regressions on some dataset, and investigate both the Net Benefit framework, and also the impact of using a balanced loss vs standard loss (as often done when faces with class imbalance and label shift)
+This post is an exploration of the "NetBenefit curves" of [Vickers and Elkin](https://journals.sagepub.com/doi/10.1177/0272989X06295361), also promoted by [Steyerberg](https://www.clinicalpredictionmodels.org/homepage), as well as a comparison of balanced vs not balanced regression. I conclude
 
-**Sneak peek of the conclusions:**
  1. A balanced regression has a better balanced accuracy, but worse calibration. The 
    AUROC is comparable. The net benefit is worse (likely due to miscalibration)
  2. The net benefit curve indicates that either predictor can be best, if optimizing the decision threshold $$\tau$$ instead of 
@@ -13,21 +12,25 @@ This post is an exploration of the "NetBenefit curves" of [Vickers and Elkin](ht
  3. It seems like the NetBenefit is sensitive to both label and covariate shift. While the balanced accuracy, is invariant to label shift (sometimes called 'prevalence invariance')
 
 
-I assume you are familiar with the ROC and the calibration plot for binary classifiers. In this section, we introduce the net benefit curve of Vickers and Elkin. 
+I assume you are familiar with the ROC, Calibration, and general terminology of machine learning and statistics.
 
-### Defining the Net Benefit curve
+## Defining the Net Benefit curve
 
-We want to evaluate a diagnostic tool. Either a diagnosis is made $$(t=1 \text{ or } t=0)$$. Either the disease is present or not $$(y=1 \text{ or } y=0)$$. The diagnosis is stated based on some observable parameters $$x$$. The fact that we make the diagnosis does not affect whether the disease is present or not, so $$T \perp Y \lvert X$$.
+A patient comes in and present symptoms $$x \in \mathbb{R}^d$$. Either they have a disease ($$y=1$$ or not $$y=0$$).
+We want to evaluate a diagnostic tool. Either a diagnosis is made $$(t=1 \text{ or } t=0)$$. The fact that we make the diagnosis does not affect whether the disease is present or not, so $$T \perp Y \lvert X$$.
 
-Diagnostic tools, when used on $$N$$ separate patients, give a number of true positives (TP= $$\#\{t=y=1\}$$), false positives (FP= $$\#\{t=1,y=0\}$$), false negatives (FN= $$\#\{t=0,y=1\}$$) and true negatives (TN= $$\#\{t=y=0\}$$). If the utility (e.g. expected number of QUALYs) for each of these cases is a, b, c and d, the utility for our model per patient, will be "benefit" $$B =\frac{1}{N} (a\cdot{}TP+b\cdot{}FP+c\cdot{}FN+d\cdot{}TN)$$.
+The diagnostic tools, when used on $$N$$ separate patients, give a number of true positives (TP= $$\#\{t=y=1\}$$), false positives (FP= $$\#\{t=1,y=0\}$$), false negatives (FN= $$\#\{t=0,y=1\}$$) and true negatives (TN= $$\#\{t=y=0\}$$). If the utility (e.g. expected number of QUALYs) for each of these cases is $$a$$, $$b$$, $$c$$ and $$d$$, the utility for our model per patient, will be "benefit" 
 
-If we never make a diagnosis, $$t=0$$ always, and we get find $$B_{none}=\frac{1}{N}(b\cdot{}FN+d\cdot{}TN)$$. This can be taken as a reference level, and we can talk about the Net Benefit as the change from this zero-level. It is the case that the number of disease is constant in the population, independant of our diagnosis, so if $$D = \#\{y=1\}$$, then $$FN+TP=D$$ and $$TN+FP=N-D$$. The baseline benefit (no treatment) is thus $$B_{none} = (bD + d(N-D))/N$$ This gives a (provisionary) formula for the net benefit $$B - B_{none} = \frac{(a-c)TP + (b-d)FP}{N}$$.
+$$B =\frac{1}{N} (a\cdot{}TP+b\cdot{}FP+c\cdot{}FN+d\cdot{}TN)$$.
 
-We can just as well scale the net benefit by dividing by $$(a-c)$$ and define $$w=(b-d)/(a-c)$$ to simplify the formula:
+It is the case that the number of disease is constant in the population, independant of our diagnosis, so if $$D = \#\{y=1\}$$, then $$FN+TP=D$$ and $$TN+FP=N-D$$.
 
-$$ NB=\frac{1}{N}( TP + w\cdot{}FP )  $$
+If we never make a diagnosis ($$t=0$$ always) we get $$B_{none}=\frac{1}{N}(c\cdot{}FN+d\cdot{}TN) = \frac{1}{N}(c\cdot{}D+d\cdot{}(N-D))$$. This can be taken as a reference level, and we can talk about the Net Benefit as the change from this zero-level. This gives a (provisionary) formula for the net benefit $$B - B_{none} = \frac{(a-c)TP + (b-d)FP}{N}$$.
+We can scale the net benefit by dividing by $$(a-c)$$ and define $$w=(b-d)/(a-c)$$ to simplify the formula:
 
-If the exact probability that a patient has the disease, $$\rho=p(y=1\lvert{}x)$$ was known, the choice choose to make a diagnosis would have expected utility $$a\cdot{}\rho + b\cdot(1-\rho)$$. The expected utility of not diagnosing would be $$c\cdot{}\rho{}+d\cdot(1-\rho{})$$. The probability $$p_t$$ where diagnosing and not diagnosing is of equal utility is the solution to 
+$$ NB=\frac{1}{N}( TP + w\cdot{}FP ) $$
+
+If the exact probability that a patient has the disease, $$\rho=p(y=1\lvert{}x)$$ was known, the choice choose to make a diagnosis would have expected utility $$a\rho + b(1-\rho)$$. The expected utility of not diagnosing would be $$c\rho{}+d(1-\rho{})$$. The probability $$p_t$$ where diagnosing and not diagnosing is of equal utility is the solution to 
 
 $$ap_t + b(1-p_t) = cp_t+d(1-p_t)$$
 
@@ -43,18 +46,34 @@ Finally, sweep the threshold $$p_t$$ and plot the net benefit at each $$p_t$$ fo
 
 #### Remarks
 
-The net benefit calculation suffers some problems. The first one is that it is dependant on the feature distribution. Considering the law of large numbers, the net benefit curve is a consistent estimator of
+##### Remark 1 - Prevalence Depencence
 
-$$  p(t=1,y=1) + w\cdot{} p(t=1,y=0) = p(t=1\lvert{}y=1)p(y=1) + w\cdot{} p(t=1\lvert{}y=0)p(y=0)$$
+The net benefit calculation suffers the problem that [it is dependant on the prevalence](https://link.springer.com/article/10.1186/s41512-019-0064-7). Considering the law of large numbers, the net benefit curve is a consistent estimator of
 
-but in case there is distribution shift, this quantity will not generalize from the training data to future test data. Normally, we consider the quantities Sensitivity and Specificiy, since these depend on the conditional quantity
+$$  p(t=1,y=1) + w\cdot{} p(t=1,y=0) = p(t=1\lvert{}y=1)p(y=1) + w\cdot{} p(t=1\lvert{}y=0)p(y=0) . \tag{1} $$
 
-$$ p(t\lvert{}y) = \int_{x} p(t|x)p(x|y) \,\mathrm{d}x = \int_{x} 1\{f(x) > \tau\} p(x|y) \,\mathrm{d}x $$
+Under arbitrary distribution shifts, you cannot know anything. But we often consider the situation of label shift -- where $$p(x\lvert{}y)$$ is constant, but $$p(y)$$ changes. Using measures like sensitivity, specificiy and balanced accuracy is then preferred as they depent on 
 
-which might bu invariant, despite changes in $$p(y)$$ (this is a so called label shift, of a prevalence change). 
-In other words: the net benefit computed on one dataset might not be indicative of the net benefit on another dataset, if there is label shift in the data.
+$$ p(t\lvert{}y) = \int_{x} p(t|x)p(x|y) \,\mathrm{d}x$$
 
-The second issue is the choice of cut-point $$\tau=p_t$$, which might not be optimal. For every $$p_t$$, there is some $$\tau_{opt}$$ that maximizes the net benefit. If the model is perfect, $$f(x) = p(y=1\lvert{}x)$$, then it seems that $$\tau_{opt}=p_t$$. If the model is not perfect this choice might not be optimal. Remember that if you optimize for $$\tau_{opt}$$, do so not over the test data, to avoid data leakage.
+which is invariant to changes in $$p(y)$$ (this is a so called label shift, of a prevalence change). 
+In other words: the net benefit computed on one dataset might not be indicative of the net benefit on another dataset if there is label shift in the data.
+
+##### Remark 2 - Suboptimal decision threshold
+
+The second issue is the choice of cut-point $$\tau=p_t$$, which might not be optimal. For every $$p_t$$, there is some $$\tau_{opt}$$ that maximizes the net benefit. Consider the population level net benefit formula $$(1)$$. It can be rewritten as 
+
+$$N.B = \int 1\{f(x) > \tau \}\left[ p(y=1\lvert{}x) - \frac{p_t}{1-p_t}(1-p(y=1\lvert{}x))\right] p(x) \,\mathrm{d}x , $$
+
+which is an integral over three factors. Only the bracketed expression is not always nonnegative. To get the optimal net benefit, we should choose $$f(x)$$ and $$\tau$$ so that the bracketed expression is always positive. How can we do that? It might not be genreally solvable, but we can consider the perfect predictor case, $$f(x) = p(y=1\lvert{}x)$$.
+
+$$N.B = \int 1\{p(y=1\lvert{}x) > \tau \}\left[ p(y=1\lvert{}x) - \frac{p_t}{1-p_t}(1-p(y=1\lvert{}x))\right] p(x) \,\mathrm{d}x $$
+
+It is clear that $$\left[ p(y=1\lvert{}x) - \frac{p_t}{1-p_t}(1-p(y=1\lvert{}x))\right] > 0 $$ if and only if $$p(y=1\lvert{}x) > p_t$$, leading to the conclusion that the optimal threshold is $$\tau_{opt} = p_t$$. This is the heuristic of Vickers and Elkin. It is provably optimal under a perfect prediction model. It is reasonable (but I have not proven so) that it is optimal also under [calibrated models](https://uu.diva-portal.org/smash/record.jsf?pid=diva2%3A1753140&dswid=-1164), where 
+
+$$\mathbb{E}[Y\lvert{}f(x)=s] = \mathbb{E}[Y \lvert{} p(y=1\lvert{}x)=s]$$.
+
+For a general model $$f(x)$$, the optimal threshold is not known, but we can do numerical optimization to find it.
 
 
 ## Doing the analysis
