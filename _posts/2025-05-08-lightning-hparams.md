@@ -3,19 +3,19 @@ title: "Logging Hyperparameters in Lightning"
 tags: ['optimization', 'pytorch', 'tensorboard', 'lightning']
 ---
 
-# Logging Hyperparameters in Lightning
-I've now looked up how one should use PyTorch Lightning to log hyperparameters into TensorBoard. It is not hard, but I found the documentation a bit confusing.
-I want to record hyperparameters for hyperparameter tuning, and the primary API is to record the hyperparameters for reinstantiation of the model from checkpoints. So below is a simple working example on how to do it.
+I've looked up how to use PyTorch Lightning to log hyperparameters into TensorBoard too many times now.
+It is not hard, but it is a little confusing.
+The primary API is to record the hyperparameters for reinstantiation of the model from checkpoints, and not for hyperparameter tuning.
+So below is a simple working example on how to do it.
 
 The key lines is to have 
-- `self.save_hyperparameters()` in the constructor of your LightningModule.
-- `self.log("hp_metric", loss)` in somewhere, e.g. in the test step.
 - `default_hp_metric=True` in the `TensorBoardLogger` instantiation.
+- `self.save_hyperparameters()` in the constructor of your LightningModule.
+- `self.log("hp_metric", loss)` somewhere, e.g. in the test step.
 
-
-### Minimal example
-
-The below does a logitistic regression on a toy dataset, with Adam optimizer. The input dimension and the learning rate are hyperparameters. The test loss is logged as the hyperparameter evaluation metric.
+The below example does logitistic regression on a toy dataset.
+The input dimension and the learning rate are hyperparameters.
+The test loss is logged as the hyperparameter evaluation metric.
 
 ```python
 import sklearn.datasets
@@ -32,27 +32,23 @@ class LogRegModule(lightning.LightningModule):
     # and store them in the checkpoint. It will only log them to tensorboard 
     # if the logger is set up to do so. See `default_hp_metric` below.
     self.save_hyperparameters()
-    self.linear = nn.Linear(input_dim, 1)
+    self.linear = nn.Linear(self.hparams.input_dim, 1)
     self.bcewithlogitsloss = nn.BCEWithLogitsLoss()
 
-  def forward(self, x):
-    logits = self.linear(x)
-    return logits
-
-  def training_step(self, batch, batch_idx):
+    def training_step(self, batch, batch_idx):
     x, y = batch
-    logits = self(x)
+    logits = self.linear(x)
     loss = self.bcewithlogitsloss(logits, y.float().unsqueeze(1))
     self.log("nll/train", loss)
     return loss
 
   def test_step(self, batch, batch_idx):
     x, y = batch
-    logits = self(x)
+    logits = self.linear(x)
     loss = self.bcewithlogitsloss(logits, y.float().unsqueeze(1))
 
     self.log("nll/test", loss)
-    # you must log `hp_metric` if you want the HPARAMS view in tensorboard to work
+    # you must log `hp_metric` to get the HPARAMS view in tensorboard
     self.log("hp_metric", loss)
     return loss
 
@@ -62,8 +58,6 @@ class LogRegModule(lightning.LightningModule):
 
 
 def dataloaders():
-  """Generates data and returns train/test DataLoaders."""
-
   X, y = sklearn.datasets.make_classification(
     n_samples=5_000,
     n_features=20,
@@ -72,12 +66,8 @@ def dataloaders():
   X = torch.tensor(X, dtype=torch.float32)
   y = torch.tensor(y, dtype=torch.long)
   dataset = torch.utils.data.TensorDataset(X, y)
-
   train_dataset, test_dataset = torch.utils.data.random_split(dataset, [0.8, 0.2])
-
-  train_loader = torch.utils.data.DataLoader(
-    train_dataset, batch_size=64, shuffle=True, num_workers=2
-  )
+  train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=2)
   test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=64, num_workers=2)
   return train_loader, test_loader
 
@@ -88,10 +78,10 @@ if __name__ == "__main__":
   model = LogRegModule(learning_rate=0.01, input_dim=20)
   # By setting `default_hp_metric=True`, we log the hyperparameters
   # already in the self.save_hyperparameters() call.
-  # it is kind of like calling self.log('hp_metric', -1) in the constructor.
+  # it is similar to  of like calling self.log('hp_metric', -1) in the constructor.
   # This is useful for hyperparameter tuning, since the hyperparameters
   # are logged even if the training is aborted and the test step is never reached.  
-  logger = lightning.pytorch.loggers.bundle exec jekyll serve --force_polling --livereload --draft --incremental(
+  logger = lightning.pytorch.TensorBoardLogger(
     "./toy_hparam_logs",
     default_hp_metric=True 
   )
