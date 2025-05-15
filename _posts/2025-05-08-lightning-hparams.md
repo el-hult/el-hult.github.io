@@ -90,5 +90,8 @@ if __name__ == "__main__":
     logger=logger,
   )
   trainer.fit(model, train_dataloaders=train_loader)
+  logger._default_hp_metric = None # in 'test' the model would be reinstantiated and the default hp metric would be logged again, which makes no sense ...
   trainer.test(model, dataloaders=test_loader)
+  # ... and this predict-call would log the hp metric again, effectively overwriting the hp_metric from the test step. This would mess up the tensorboard logs.
+  trainer.predict(model, dataloaders=test_loader)
 ```
