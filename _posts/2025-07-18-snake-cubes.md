@@ -59,7 +59,7 @@ A solution $$\mathcal{L}$$ for a snake square is considered \textbf{valid} if th
 - If we consider a realized solution starting at $$(1,1)$$ facing East, this particular realized solution visits every coordinate in a $$3 \times 3$$ square exactly once (forming a clockwise inward spiral). Therefore, the solution $$(3, R, 3, R, 3, R, 2, R, 2)$$ is considered valid.
 - There is no other distinct valid solution for this snake square. The start of the sequence is $$(3,3,3)$$, implying we must start in a corner for the snake to fit in the square. To get the representative solution, we must start with a R turn. From there on, all turns are decided considering the snake must fit in the square and not self-overlap.
 
-# Prroblem
+# Problem
 How many valid distinct solutions are there for the snake $$(3,2,3,2,3)$$?
 
 ---
