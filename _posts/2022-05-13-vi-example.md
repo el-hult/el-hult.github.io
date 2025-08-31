@@ -145,7 +145,7 @@ but the expectation in the denominator is difficult. The standard trick in Bayes
 We are looking for a function $$q(a,w,\underline{z}) \approx f_{W,A, \underline{Z} \mid \underline{X} }(w,a, \underline{z} \mid \underline{x}) $$, and hopefully we can marginalize out the $$\underline{z}$$-factor in the end. How do we choose $$q$$? One can show that 
 
 $$ 
-\operatorname*{arg\,max}_{q}  \mathbb E_{q}\left[ \frac{\ln f_{\underline{X},\underline{Z},W,A}(\underline{X}, \underline{Z},W,A)}{q(A,W,\underline{Z})} \right]
+\operatorname*{arg\,max}_{q}  \mathbb E_{q}\left[ \ln \frac{ \left\{f_{\underline{X},\underline{Z},W,A}(\underline{X}, \underline{Z},W,A)}{q(A,W,\underline{Z})}\right\} \right]
 =  
 \operatorname*{arg\,min}_{q} D_{KL}(q \Vert f_{W,A, \underline{Z} \mid \underline{X} }) 
 $$
