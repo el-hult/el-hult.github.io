@@ -2,6 +2,7 @@ remote_theme: "mmistakes/minimal-mistakes@4.22.0"
 show_downloads: false
 plugins:
   - jekyll-include-cache
+  - jekyll-feed
 
 minimal_mistakes_skin    : "default"
 
