@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Ludvig Hult
+title: About
 author_profile: true
 related: false
 ---
@@ -10,4 +10,11 @@ My main research interests are in statistical machine learning, in problems wher
 My PhD studies were supervised by [Dave Zachariah](https://www.it.uu.se/katalog/davza513) and co-supervised by [Thomas Schön](https://user.it.uu.se/~thosc112/index.html).
 
 This blog is for my personal publication - a collection of notes related to research, hobbies, teaching, and more.
-Go to the full list of [all blog posts](/posts) for the full list of posts.
+
+## Recent posts
+
+{% for post in site.posts limit:3 %}
+- [{{ post.title }}]({{ post.url }}) <small>{{ post.date | date: "%Y-%m-%d" }}</small>
+{% endfor %}
+
+[All posts](/posts)
