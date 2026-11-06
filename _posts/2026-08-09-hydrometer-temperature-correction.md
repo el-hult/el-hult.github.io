@@ -85,7 +85,7 @@ A single pure-water-based correction is therefore only a first approximation. Fo
 
 For a hydrometer calibrated at 20°C, measuring at typical room temperatures (20–25°C), the pure-water correction is about +0.001 SG. Even the larger manufacturer correction is at most +0.003 SG in this range. Since homebrewing hydrometers can be read to about ±0.001 SG, the temperature correction is comparable to but not dramatically larger than the reading precision. At 30°C the correction grows to +0.003–0.005 SG and becomes clearly significant.
 
-In practice: if your sample is within a few degrees of the calibration temperature, the correction is small — on the order of one scale division. If you are 10°C off, it matters. For a companion post evaluating how large these errors are compared to other sources of instrument error, see [How accurate are homebrew hydrometers and refractometers?](/sugar-measurement-calibration/).
+In practice: if your sample is within a few degrees of the calibration temperature, the correction is small — on the order of one scale division. If you are 10°C off, it matters. For a companion post evaluating how large these errors are compared to other sources of instrument error, see [How accurate are homebrew hydrometers and refractometers?]({% post_url 2026-08-09-sugar-measurement-calibration %}).
 
 [^jones]: F.E. Jones and G.L. Harris, "ITS-90 Density of Water Formulation for Volumetric Standards Calibration," *J. Res. Natl. Inst. Stand. Technol.*, 97(3), 335–340 (1992). [PDF](https://nvlpubs.nist.gov/nistpubs/jres/097/jresv97n3p335_a1b.pdf).
 

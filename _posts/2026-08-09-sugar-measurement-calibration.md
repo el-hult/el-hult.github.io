@@ -19,7 +19,7 @@ I tested four instruments:
 - **German hydrometer** — glass tube, calibrated at 20°C. Reads in Oechsle (°Oe), which converts to SG by $$\text{SG} = 1 + \text{°Oe}/1000$$.
 - **Refractometer** — a handheld optical refractometer with automatic temperature compensation (ATC). Reads SG on one of its scales. Zero-point calibrated with tap water at 20°C.
 
-All three hydrometers are the classical kind: a sealed glass tube with a paper scale inside and some metal bead ballast at the bottom. You read the SG off the scale at the lower meniscus of the liquid surface. The different calibration temperatures matter — see [my post on hydrometer temperature correction](/hydrometer-temperature-correction/) for the physics.
+All three hydrometers are the classical kind: a sealed glass tube with a paper scale inside and some metal bead ballast at the bottom. You read the SG off the scale at the lower meniscus of the liquid surface. The different calibration temperatures matter — see [my post on hydrometer temperature correction]({% post_url 2026-08-09-hydrometer-temperature-correction %}) for the physics.
 
 ## Making reference samples
 
@@ -84,7 +84,7 @@ Several things stand out:
 
 ## After temperature corrections
 
-What happens when we apply the [physics-based temperature correction](/hydrometer-temperature-correction/) to all three hydrometers? Each reading is multiplied by $$\rho_{\text{water}}(T_{\text{cal}}) / \rho_{\text{water}}(T_{\text{sample}})$$, using the actual measured temperature for each sample. The refractometer has ATC and stays as-is.
+What happens when we apply the [physics-based temperature correction]({% post_url 2026-08-09-hydrometer-temperature-correction %}) to all three hydrometers? Each reading is multiplied by $$\rho_{\text{water}}(T_{\text{cal}}) / \rho_{\text{water}}(T_{\text{sample}})$$, using the actual measured temperature for each sample. The refractometer has ATC and stays as-is.
 
 {% include image name="residuals_corrected.png" caption="Residuals after applying physics-based temperature corrections to all three hydrometers." %}
 
@@ -92,7 +92,7 @@ The corrections help the Chinese hydrometer significantly — its RMSE drops fro
 
 But for the American and German hydrometers, the correction makes things *worse*. The American goes from RMSE 0.003 to 0.003 (unchanged), while the German goes from 0.003 to 0.004. Both already read slightly high, and the correction pushes readings further upward. This tells us that the dominant error source for these instruments is not temperature — it's something else, likely meniscus reading ambiguity. Reading the lower meniscus versus the upper meniscus on a hydrometer can easily shift the reading by 0.001–0.004 SG.
 
-For comparison, the American hydrometer's manufacturer correction table makes things even worse (RMSE 0.004). This is unsurprising: the table is calibrated for beer wort, not sucrose solutions. Beer wort contains sugars, proteins, and hop compounds that give it a different thermal expansion than a pure sucrose–water mixture. As discussed in the [companion post](/hydrometer-temperature-correction/), the manufacturer corrections are 1.6–2.4× larger than what pure water physics predicts, consistent with the OIV finding that correction tables must be matched to the liquid being measured.
+For comparison, the American hydrometer's manufacturer correction table makes things even worse (RMSE 0.004). This is unsurprising: the table is calibrated for beer wort, not sucrose solutions. Beer wort contains sugars, proteins, and hop compounds that give it a different thermal expansion than a pure sucrose–water mixture. As discussed in the [companion post]({% post_url 2026-08-09-hydrometer-temperature-correction %}), the manufacturer corrections are 1.6–2.4× larger than what pure water physics predicts, consistent with the OIV finding that correction tables must be matched to the liquid being measured.
 
 ## Summary of accuracy
 
@@ -146,4 +146,4 @@ The Python script used to generate the plots and compute the statistics is avail
 
 - NBS Circular 440, "Polarimetry, Saccharimetry and the Sugars" (F.J. Bates et al., 1942). [Internet Archive](https://archive.org/details/circularofbureau440bate/page/632/mode/2up). Source of the Brix-to-apparent-SG reference table.
 
-- For references on the temperature correction method, see the [companion post](/hydrometer-temperature-correction/).
+- For references on the temperature correction method, see the [companion post]({% post_url 2026-08-09-hydrometer-temperature-correction %}).
